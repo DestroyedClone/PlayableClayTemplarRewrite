@@ -23,7 +23,7 @@ namespace PlayableTemplar.Modules
             armorBuff = AddNewBuff("PlayableTemplarArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
             stationaryArmorBuff = AddNewBuff("PlayableTemplarStationaryArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
             overdriveBuff = AddNewBuff("PlayableTemplarOverdriveBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
-            igniteDebff = AddNewBuff("PlayableTemplarIgniteBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
+            igniteDebuff = AddNewBuff("PlayableTemplarIgniteBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
         }
 
         internal static void FixBuffCatalog(ILContext il)

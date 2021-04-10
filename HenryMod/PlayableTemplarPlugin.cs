@@ -199,7 +199,7 @@ namespace PlayableTemplar
 			bool flag = self && self.HasBuff(Modules.Buffs.armorBuff);
 			if (flag)
 			{
-				self.armor + PlayableTemplar.minigunArmorBoost.Value;
+				self.armor + Modules.Config.minigunArmorBoost.Value;
 			}
 			bool flag2 = self && self.HasBuff(Modules.Buffs.stationaryArmorBuff);
 			if (flag2)
