@@ -1,7 +1,7 @@
 ﻿using R2API;
 using System;
 
-namespace HenryMod.Modules
+namespace PlayableTemplar.Modules
 {
     internal static class Tokens
     {

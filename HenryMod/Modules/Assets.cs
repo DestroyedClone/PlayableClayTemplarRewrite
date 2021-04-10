@@ -7,7 +7,7 @@ using System.IO;
 using System.Collections.Generic;
 using RoR2.UI;
 
-namespace HenryMod.Modules
+namespace PlayableTemplar.Modules
 {
     internal static class Assets
     {

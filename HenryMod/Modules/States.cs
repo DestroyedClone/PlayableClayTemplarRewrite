@@ -7,7 +7,7 @@ using EntityStates;
 using RoR2;
 using System.Reflection;
 
-namespace HenryMod.Modules
+namespace PlayableTemplar.Modules
 {
     public static class States
     {

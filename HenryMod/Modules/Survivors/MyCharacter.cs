@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules.Survivors
+namespace PlayableTemplar.Modules.Survivors
 {
     internal class MyCharacter : SurvivorBase
     {

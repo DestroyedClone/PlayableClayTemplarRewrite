@@ -4,7 +4,7 @@ using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules
+namespace PlayableTemplar.Modules
 {
     public static class Buffs
     {

@@ -1,4 +1,4 @@
-﻿namespace HenryMod.Modules
+﻿namespace PlayableTemplar.Modules
 {
     internal static class StaticValues
     {

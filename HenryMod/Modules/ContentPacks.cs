@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine;
 
-namespace HenryMod.Modules
+namespace PlayableTemplar.Modules
 {
     internal class ContentPacks
     {
