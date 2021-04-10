@@ -6,6 +6,7 @@ namespace PlayableTemplar.Modules
     internal static class Helpers
     {
         internal const string agilePrefix = "<style=cIsUtility>Agile.</style> ";
+        internal const string rapidFirePrefix = "<style=cIsDamage>Rapidfire</style>. ";
 
         internal static string ScepterDescription(string desc)
         {

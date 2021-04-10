@@ -8,8 +8,10 @@ namespace PlayableTemplar.Modules
 {
     public static class Buffs
     {
-        // armor buff gained during roll
         internal static BuffDef armorBuff;
+        internal static BuffDef stationaryArmorBuff;
+        internal static BuffDef overdriveBuff;
+        internal static BuffDef igniteDebuff;
 
         internal static List<BuffDef> buffDefs = new List<BuffDef>();
 
@@ -18,7 +20,10 @@ namespace PlayableTemplar.Modules
             // fix the buff catalog to actually register our buffs
             IL.RoR2.BuffCatalog.Init += FixBuffCatalog; // remove this hook after next ror2 update as it will have been fixed
 
-            armorBuff = AddNewBuff("HenryArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
+            armorBuff = AddNewBuff("PlayableTemplarArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
+            stationaryArmorBuff = AddNewBuff("PlayableTemplarStationaryArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
+            overdriveBuff = AddNewBuff("PlayableTemplarOverdriveBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
+            igniteDebff = AddNewBuff("PlayableTemplarIgniteBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
         }
 
         internal static void FixBuffCatalog(ILContext il)
