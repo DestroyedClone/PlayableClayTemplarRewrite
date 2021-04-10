@@ -9,7 +9,7 @@ namespace PlayableTemplar.Modules.Survivors
 {
     internal class MyCharacter : SurvivorBase
     {
-        internal override string bodyName { get; set; } = "Henry";
+        internal override string bodyName { get; set; } = "PlayableTemplar";
 
         internal override GameObject bodyPrefab { get; set; }
         internal override GameObject displayPrefab { get; set; }
@@ -23,38 +23,22 @@ namespace PlayableTemplar.Modules.Survivors
             armor = 20f,
             armorGrowth = 0f,
             bodyName = instance.bodyName + "Body",
-            bodyNameToken = PlayableTemplarPlugin.developerPrefix + "_HENRY_BODY_NAME",
+            bodyNameToken = PlayableTemplarPlugin.developerPrefix + "_PLAYABLETEMPLAR_BODY_NAME",
             bodyColor = Color.grey,
-            characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
+            characterPortrait = Modules.Assets.LoadCharacterIcon("PlayableTemplar"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
             damage = 12f,
             healthGrowth = 33f,
             healthRegen = 1.5f,
             jumpCount = 1,
             maxHealth = 110f,
-            subtitleNameToken = PlayableTemplarPlugin.developerPrefix + "_HENRY_BODY_SUBTITLE",
-            podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
+            subtitleNameToken = PlayableTemplarPlugin.developerPrefix + "_PLAYABLETEMPLAR_BODY_SUBTITLE",
+            podPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/CrocoBody").GetComponent<CharacterBody>().preferredPodPrefab
         };
 
-        internal static Material henryMat = Modules.Assets.CreateMaterial("matHenry");
+        internal static Material henryMat = Modules.Assets.CreateMaterial("matPlayableTemplar");
         internal override int mainRendererIndex { get; set; } = 2;
 
-        internal override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[] {
-                new CustomRendererInfo
-                {
-                    childName = "SwordModel",
-                    material = henryMat,
-                },
-                new CustomRendererInfo
-                {
-                    childName = "GunModel",
-                    material = henryMat,
-                },
-                new CustomRendererInfo
-                {
-                    childName = "Model",
-                    material = henryMat
-                }};
 
         internal override Type characterMainState { get; set; } = typeof(EntityStates.GenericCharacterMain);
         internal override Type characterSpawnState { get; set; } = typeof(EntityStates.GenericCharacterSpawnState);
