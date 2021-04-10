@@ -85,7 +85,7 @@ namespace PlayableTemplar.Modules.Survivors
                 skillNameToken = prefix + "_HENRY_BODY_SECONDARY_GUN_NAME",
                 skillDescriptionToken = prefix + "_HENRY_BODY_SECONDARY_GUN_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
@@ -251,6 +251,11 @@ namespace PlayableTemplar.Modules.Survivors
             newRendererInfos[instance.mainRendererIndex].defaultMaterial = materials[2];
 
             return newRendererInfos;
+        }
+
+        internal override void InitializeItemDisplays()
+        {
+            
         }
     }
 }
