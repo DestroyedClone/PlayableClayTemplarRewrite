@@ -68,6 +68,99 @@ namespace PlayableTemplar.Modules
             projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
         }
 
+        public class TemplarMissileController : MonoBehaviour
+        {
+            // Token: 0x060000F8 RID: 248 RVA: 0x0001092C File Offset: 0x0000EB2C
+            private void Awake()
+            {
+                this.rb = base.GetComponentInChildren<Rigidbody>();
+                this.speed = PlayableTemplar.TemplarMissileController.startSpeed;
+            }
+
+            // Token: 0x060000F9 RID: 249 RVA: 0x00010946 File Offset: 0x0000EB46
+            private void FixedUpdate()
+            {
+                this.speed += PlayableTemplar.TemplarMissileController.acceleration;
+                this.rb.velocity = base.transform.forward * this.speed;
+            }
+
+            // Token: 0x060000FA RID: 250 RVA: 0x0001097D File Offset: 0x0000EB7D
+            public TemplarMissileController()
+            {
+            }
+
+            // Token: 0x060000FB RID: 251 RVA: 0x00010986 File Offset: 0x0000EB86
+            // Note: this type is marked as 'beforefieldinit'.
+            static TemplarMissileController()
+            {
+            }
+
+            // Token: 0x04000150 RID: 336
+            public static float acceleration = 2.5f;
+
+            // Token: 0x04000151 RID: 337
+            public static float startSpeed = 25f;
+
+            // Token: 0x04000152 RID: 338
+            private float speed;
+
+            // Token: 0x04000153 RID: 339
+            private Rigidbody rb;
+        }
+
+        public class TemplarExplosionForce : MonoBehaviour
+        {
+            // Token: 0x060000FE RID: 254 RVA: 0x000109B8 File Offset: 0x0000EBB8
+            private void Awake()
+            {
+                bool flag = true;
+                bool flag2 = flag;
+                if (flag2)
+                {
+                    Collider[] array = Physics.OverlapSphere(base.transform.position, this.radius);
+                    foreach (Collider collider in array)
+                    {
+                        CharacterBody componentInChildren = collider.transform.root.GetComponentInChildren<CharacterBody>();
+                        bool flag3 = componentInChildren != null;
+                        if (flag3)
+                        {
+                            bool flag4 = componentInChildren.baseNameToken == "TEMPLAR_NAME";
+                            if (flag4)
+                            {
+                                bool flag5 = componentInChildren.characterMotor != null;
+                                if (flag5)
+                                {
+                                    float num = 16f / Vector3.Distance(componentInChildren.transform.position, base.transform.position);
+                                    Vector3 vector = new Vector3(0f, Mathf.Clamp(num * this.force, 0f, this.maxForce), 0f);
+                                    bool flag6 = !componentInChildren.characterMotor.isGrounded;
+                                    if (flag6)
+                                    {
+                                        componentInChildren.characterMotor.ApplyForce(vector, false, false);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Token: 0x060000FF RID: 255 RVA: 0x00010AD7 File Offset: 0x0000ECD7
+            public TemplarExplosionForce()
+            {
+            }
+
+            // Token: 0x04000154 RID: 340
+            public float force = 750f;
+
+            // Token: 0x04000155 RID: 341
+            public float radius = 16f;
+
+            // Token: 0x04000156 RID: 342
+            public float maxForce = 4000f;
+        }
+
+        // Base Stuff //
+
         private static GameObject CreateGhostPrefab(string ghostName)
         {
             GameObject ghostPrefab = Modules.Assets.mainAssetBundle.LoadAsset<GameObject>(ghostName);
@@ -84,5 +177,7 @@ namespace PlayableTemplar.Modules
             GameObject newPrefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/Projectiles/" + prefabName), newPrefabName);
             return newPrefab;
         }
+
+
     }
 }

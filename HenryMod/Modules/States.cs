@@ -15,14 +15,26 @@ namespace PlayableTemplar.Modules
 
         internal static void RegisterStates()
         {
-            entityStates.Add(typeof(BaseMeleeAttack));
-            entityStates.Add(typeof(SlashCombo));
-
-            entityStates.Add(typeof(Shoot));
-
-            entityStates.Add(typeof(Roll));
-
-            entityStates.Add(typeof(ThrowBomb));
+            entityStates.Add(typeof(TemplarChargeMiniRocket));
+            entityStates.Add(typeof(TemplarChargeRocket));
+            entityStates.Add(typeof(TemplarFireMiniRocket));
+            entityStates.Add(typeof(TemplarFireRocket));
+            entityStates.Add(typeof(TemplarFireSonicBoom));
+            entityStates.Add(typeof(TemplarMinigunFire));
+            entityStates.Add(typeof(TemplarMinigunSpinDown));
+            entityStates.Add(typeof(TemplarMinigunSpinUp));
+            entityStates.Add(typeof(TemplarMinigunState));
+            entityStates.Add(typeof(TemplarRifleFire));
+            entityStates.Add(typeof(TemplarRifleSpinDown));
+            entityStates.Add(typeof(TemplarRifleState));
+            entityStates.Add(typeof(TemplarShotgun));
+            entityStates.Add(typeof(TemplarSidestep));
+            entityStates.Add(typeof(TemplarSwapWeapon));
+            entityStates.Add(typeof(TemplarThrowClaybomb));
+            entityStates.Add(typeof(TemplarChargeBeam));
+            entityStates.Add(typeof(TemplarFireBeam));
+            entityStates.Add(typeof(TemplarFlamethrower));
+            entityStates.Add(typeof(TemplarOverdrive));
 
             //  all of the following code can be removed after the next ror2 update, fixing this vanilla bug
             // fixing a vanilla bug- ignore this
