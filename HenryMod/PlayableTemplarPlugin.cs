@@ -72,7 +72,6 @@ namespace PlayableTemplar
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo di)
         {
             orig(self, di);
-			//orig.Invoke(self, di);
 			bool flag = di.inflictor != null;
 			bool flag2 = flag;
 			if (flag2)
@@ -200,24 +199,24 @@ namespace PlayableTemplar
 			bool flag = self && self.HasBuff(Modules.Buffs.armorBuff);
 			if (flag)
 			{
-				Reflection.SetPropertyValue<float>(self, "armor", self.armor + PlayableTemplar.minigunArmorBoost.Value);
+				self.armor + PlayableTemplar.minigunArmorBoost.Value;
 			}
 			bool flag2 = self && self.HasBuff(Modules.Buffs.stationaryArmorBuff);
 			if (flag2)
 			{
-				Reflection.SetPropertyValue<float>(self, "armor", self.armor + PlayableTemplar.minigunStationaryArmorBoost.Value);
+				self.armor + PlayableTemplar.minigunStationaryArmorBoost.Value;
 			}
 			bool flag3 = self && self.HasBuff(Modules.Buffs.overdriveBuff);
 			if (flag3)
 			{
-				Reflection.SetPropertyValue<float>(self, "regen", self.regen * 12f);
-				Reflection.SetPropertyValue<float>(self, "attackSpeed", self.attackSpeed * 1.5f);
+				self.regen *= 12f;
+				self.attackSpeed *= 1.5f;
 			}
 			bool flag4 = self && self.HasBuff(Modules.Buffs.igniteDebuff);
 			if (flag4)
 			{
-				Reflection.SetPropertyValue<float>(self, "armor", self.armor - 45f);
-				Reflection.SetPropertyValue<float>(self, "moveSpeed", self.moveSpeed * 0.8f);
+				self.armor -= 45f;
+				self.moveSpeed *= 0.8f;
 			}
 		}
     }
