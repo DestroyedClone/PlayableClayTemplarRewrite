@@ -7,6 +7,7 @@ namespace PlayableTemplar.Modules
     {
         internal const string agilePrefix = "<style=cIsUtility>Agile.</style> ";
         internal const string rapidFirePrefix = "<style=cIsDamage>Rapidfire</style>. ";
+        internal const string explosivePrefix = "<style=cIsDamage>Explosive</style>. ";
 
         internal static string ScepterDescription(string desc)
         {

@@ -75,18 +75,151 @@ namespace PlayableTemplar.Modules.Survivors
             string prefix = PlayableTemplarPlugin.developerPrefix;
 
             #region Primary
-            Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), "Weapon", prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), true));
+            SkillDef minigunSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_MINIGUN_NAME",
+                skillNameToken = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_MINIGUN_NAME",
+                skillDescriptionToken = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_MINIGUN_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.TemplarMinigunSpinUp)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = true, //new
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_RAPIDFIRE" }
+            });
+
+            SkillDef rifleSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_PRECISEMINIGUN_NAME",
+                skillNameToken = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_PRECISEMINIGUN_NAME",
+                skillDescriptionToken = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_PRECISEMINIGUN_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.TemplarRifleFire)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = true,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = true, //new
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { }
+            });
+
+            Modules.Skills.AddPrimarySkill(bodyPrefab, minigunSkillDef);
+            Modules.Skills.AddPrimarySkill(bodyPrefab, rifleSkillDef);
+
+            if (Modules.Config.bazookaGoBoom.Value)
+            {
+                SkillDef bazookaSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+                {
+                    skillName = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_BAZOOKA_NAME",
+                    skillNameToken = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_BAZOOKA_NAME",
+                    skillDescriptionToken = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_BAZOOKA_DESCRIPTION",
+                    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                    activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.TemplarChargeMiniRocket)),
+                    activationStateMachineName = "Weapon",
+                    baseMaxStock = 1,
+                    baseRechargeInterval = 0.1f,
+                    beginSkillCooldownOnSkillEnd = true,
+                    canceledFromSprinting = false,
+                    forceSprintDuringState = false,
+                    fullRestockOnAssign = true,
+                    interruptPriority = EntityStates.InterruptPriority.Any,
+                    resetCooldownTimerOnUse = false,
+                    isCombatSkill = true,
+                    mustKeyPress = false,
+                    cancelSprintingOnActivation = true, //new
+                    rechargeStock = 1,
+                    requiredStock = 1,
+                    stockToConsume = 1,
+                    keywordTokens = new string[] { "KEYWORD_EXPLOSIVE" }
+                });
+                Modules.Skills.AddPrimarySkill(bodyPrefab, bazookaSkillDef);
+            } else
+            {
+                SkillDef railgunSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+                {
+                    skillName = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_RAILGUN_NAME",
+                    skillNameToken = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_RAILGUN_NAME",
+                    skillDescriptionToken = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_RAILGUN_DESCRIPTION",
+                    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                    activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.TemplarChargeBeam)),
+                    activationStateMachineName = "Weapon",
+                    baseMaxStock = 1,
+                    baseRechargeInterval = 0f,
+                    beginSkillCooldownOnSkillEnd = true,
+                    canceledFromSprinting = false,
+                    forceSprintDuringState = false,
+                    fullRestockOnAssign = true,
+                    interruptPriority = EntityStates.InterruptPriority.Any,
+                    resetCooldownTimerOnUse = false,
+                    isCombatSkill = true,
+                    mustKeyPress = false,
+                    cancelSprintingOnActivation = true, //new
+                    rechargeStock = 1,
+                    requiredStock = 1,
+                    stockToConsume = 1,
+                    keywordTokens = new string[] { "KEYWORD_EXPLOSIVE" }
+                });
+                Modules.Skills.AddPrimarySkill(bodyPrefab, railgunSkillDef);
+            }
+
+            SkillDef flameThrowerSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_FLAMETHROWER_NAME",
+                skillNameToken = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_FLAMETHROWER_NAME",
+                skillDescriptionToken = prefix + "_PLAYABLETEMPLAR_BODY_PRIMARY_FLAMETHROWER_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.TemplarFlamethrower)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = true, //new
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_EXPLOSIVE" }
+            });
+            Modules.Skills.AddPrimarySkill(bodyPrefab, flameThrowerSkillDef);
             #endregion
 
             #region Secondary
-            SkillDef shootSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef grenadeSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_HENRY_BODY_SECONDARY_GUN_NAME",
-                skillNameToken = prefix + "_HENRY_BODY_SECONDARY_GUN_NAME",
-                skillDescriptionToken = prefix + "_HENRY_BODY_SECONDARY_GUN_DESCRIPTION",
+                skillName = prefix + "_PLAYABLETEMPLAR_BODY_SECONDARY_GUN_NAME",
+                skillNameToken = prefix + "_PLAYABLETEMPLAR_BODY_SECONDARY_GUN_NAME",
+                skillDescriptionToken = prefix + "_PLAYABLETEMPLAR_BODY_SECONDARY_GUN_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.)),
-                activationStateMachineName = "Slide",
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.TemplarMinigunSpinUp)),
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
@@ -101,51 +234,19 @@ namespace PlayableTemplar.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE" }
+                keywordTokens = new string[] { }
             });
 
-            Modules.Skills.AddSecondarySkill(bodyPrefab, shootSkillDef);
-            #endregion
-
-            #region Utility
-            SkillDef rollSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef shotgunSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_HENRY_BODY_UTILITY_ROLL_NAME",
-                skillNameToken = prefix + "_HENRY_BODY_UTILITY_ROLL_NAME",
-                skillDescriptionToken = prefix + "_HENRY_BODY_UTILITY_ROLL_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Roll)),
-                activationStateMachineName = "Body",
+                skillName = prefix + "_PLAYABLETEMPLAR_BODY_SECONDARY_SHOTGUN_NAME",
+                skillNameToken = prefix + "_PLAYABLETEMPLAR_BODY_SECONDARY_SHOTGUN_NAME",
+                skillDescriptionToken = prefix + "_PLAYABLETEMPLAR_BODY_SECONDARY_SHOTGUN_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.TemplarMinigunSpinUp)),
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 4f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = true,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = false,
-                mustKeyPress = false,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
-            });
-
-            Modules.Skills.AddUtilitySkill(bodyPrefab, rollSkillDef);
-            #endregion
-
-            #region Special
-            SkillDef bombSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = prefix + "_HENRY_BODY_SPECIAL_BOMB_NAME",
-                skillNameToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_NAME",
-                skillDescriptionToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
-                activationStateMachineName = "Slide",
-                baseMaxStock = 1,
-                baseRechargeInterval = 10f,
+                baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -154,13 +255,123 @@ namespace PlayableTemplar.Modules.Survivors
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = false,
-                cancelSprintingOnActivation = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { }
+            });
+
+            Modules.Skills.AddSecondarySkill(bodyPrefab, grenadeSkillDef);
+            Modules.Skills.AddSecondarySkill(bodyPrefab, shotgunSkillDef);
+            #endregion
+
+            #region Utility
+            SkillDef overdriveSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PLAYABLETEMPLAR_BODY_UTILITY_OVERDRIVE_NAME",
+                skillNameToken = prefix + "_PLAYABLETEMPLAR_BODY_UTILITY_OVERDRIVE_NAME",
+                skillDescriptionToken = prefix + "_PLAYABLETEMPLAR_BODY_UTILITY_OVERDRIVE_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.TemplarOverdrive)),
+                activationStateMachineName = "Body",
+                baseMaxStock = Modules.Config.overdriveStock.Value,
+                baseRechargeInterval = Modules.Config.overdriveCooldown.Value,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1
             });
 
+            SkillDef rollSkillDef = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<SkillLocator>().utility.skillFamily.variants[0].skillDef;
+
+            SkillDef dodgeSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PLAYABLETEMPLAR_BODY_UTILITY_DODGE_NAME",
+                skillNameToken = prefix + "_PLAYABLETEMPLAR_BODY_UTILITY_DODGE_NAME",
+                skillDescriptionToken = prefix + "_PLAYABLETEMPLAR_BODY_UTILITY_DODGE_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.TemplarSidestep)),
+                activationStateMachineName = "Body",
+                baseMaxStock = Modules.Config.dashStock.Value,
+                baseRechargeInterval = Modules.Config.dashCooldown.Value,
+                beginSkillCooldownOnSkillEnd = rollSkillDef.beginSkillCooldownOnSkillEnd,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true, //new
+                fullRestockOnAssign = rollSkillDef.fullRestockOnAssign,
+                interruptPriority = rollSkillDef.interruptPriority,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = rollSkillDef.mustKeyPress,
+                cancelSprintingOnActivation = false,
+                rechargeStock = rollSkillDef.rechargeStock,
+                requiredStock = rollSkillDef.requiredStock,
+                stockToConsume = rollSkillDef.stockToConsume
+            });
+
+            Modules.Skills.AddUtilitySkill(bodyPrefab, overdriveSkillDef);
+            Modules.Skills.AddUtilitySkill(bodyPrefab, dodgeSkillDef);
+            #endregion
+
+            #region Special
+            SkillDef bombSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PLAYABLETEMPLAR_BODY_SPECIAL_BOMB_NAME",
+                skillNameToken = prefix + "_PLAYABLETEMPLAR_BODY_SPECIAL_BOMB_NAME",
+                skillDescriptionToken = prefix + "_PLAYABLETEMPLAR_BODY_SPECIAL_BOMB_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.TemplarChargeRocket)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = Modules.Config.bazookaStock.Value,
+                baseRechargeInterval = Modules.Config.bazookaCooldown.Value,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_EXPLOSIVE" }
+            });
+            SkillDef swapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PLAYABLETEMPLAR_BODY_SPECIAL_SWAP_NAME",
+                skillNameToken = prefix + "_PLAYABLETEMPLAR_BODY_SPECIAL_SWAP_NAME",
+                skillDescriptionToken = prefix + "_PLAYABLETEMPLAR_BODY_SPECIAL_SWAP_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.TemplarSwapWeapon)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0.1f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+
             Modules.Skills.AddSpecialSkill(bodyPrefab, bombSkillDef);
+            Modules.Skills.AddSpecialSkill(bodyPrefab, swapSkillDef);
             #endregion
         }
 
@@ -179,7 +390,7 @@ namespace PlayableTemplar.Modules.Survivors
             List<SkinDef> skins = new List<SkinDef>();
 
             #region DefaultSkin
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(PlayableTemplarPlugin.developerPrefix + "_HENRY_BODY_DEFAULT_SKIN_NAME",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(PlayableTemplarPlugin.developerPrefix + "_PLAYABLETEMPLAR_BODY_DEFAULT_SKIN_NAME",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
                 defaultRenderers,
                 mainRenderer,
@@ -215,7 +426,7 @@ namespace PlayableTemplar.Modules.Survivors
                 masteryMat
             });
 
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(PlayableTemplarPlugin.developerPrefix + "_HENRY_BODY_MASTERY_SKIN_NAME",
+            SkinDef masterySkin = Modules.Skins.CreateSkinDef(PlayableTemplarPlugin.developerPrefix + "_PLAYABLETEMPLAR_BODY_MASTERY_SKIN_NAME",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
                 masteryRendererInfos,
                 mainRenderer,
