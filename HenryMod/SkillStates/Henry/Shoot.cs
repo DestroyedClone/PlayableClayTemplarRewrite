@@ -68,7 +68,7 @@ namespace HenryMod.SkillStates
                         owner = base.gameObject,
                         muzzleName = muzzleString,
                         smartCollision = false,
-                        procChainMask = default(ProcChainMask),
+                        procChainMask = default,
                         procCoefficient = procCoefficient,
                         radius = 0.75f,
                         sniper = false,

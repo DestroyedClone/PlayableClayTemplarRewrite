@@ -36,9 +36,8 @@ namespace PlayableTemplar.SkillStates
 			{
 				float num2 = 1000f;
 				Vector3 vector = this.modifiedAimRay.origin + this.modifiedAimRay.direction * num2;
-				RaycastHit raycastHit;
-				bool flag2 = Physics.Raycast(this.modifiedAimRay, out raycastHit, num2, LayerIndex.world.mask | LayerIndex.defaultLayer.mask | LayerIndex.entityPrecise.mask);
-				if (flag2)
+                bool flag2 = Physics.Raycast(this.modifiedAimRay, out RaycastHit raycastHit, num2, LayerIndex.world.mask | LayerIndex.defaultLayer.mask | LayerIndex.entityPrecise.mask);
+                if (flag2)
 				{
 					vector = raycastHit.point;
 				}

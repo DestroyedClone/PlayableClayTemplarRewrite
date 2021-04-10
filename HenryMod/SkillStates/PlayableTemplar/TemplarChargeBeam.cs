@@ -92,9 +92,8 @@ namespace PlayableTemplar.SkillStates
 				Vector3 position = this.laserEffect.transform.parent.position;
 				Vector3 point = aimRay.GetPoint(num);
 				this.laserDirection = point - position;
-				RaycastHit raycastHit;
-				bool flag2 = Physics.Raycast(aimRay, out raycastHit, num, LayerIndex.world.mask | LayerIndex.entityPrecise.mask);
-				if (flag2)
+                bool flag2 = Physics.Raycast(aimRay, out RaycastHit raycastHit, num, LayerIndex.world.mask | LayerIndex.entityPrecise.mask);
+                if (flag2)
 				{
 					point = raycastHit.point;
 				}
@@ -130,9 +129,11 @@ namespace PlayableTemplar.SkillStates
 			bool flag = base.fixedAge >= this.duration && base.isAuthority;
 			if (flag)
 			{
-				TemplarFireBeam templarFireBeam = new TemplarFireBeam();
-				templarFireBeam.laserDirection = this.laserDirection;
-				this.outer.SetNextState(templarFireBeam);
+                TemplarFireBeam templarFireBeam = new TemplarFireBeam
+                {
+                    laserDirection = this.laserDirection
+                };
+                this.outer.SetNextState(templarFireBeam);
 			}
 		}
 

@@ -64,9 +64,7 @@ namespace PlayableTemplar.SkillStates
 					EffectManager.SimpleMuzzleFlash(TemplarFireMiniRocket.effectPrefab, base.gameObject, muzzleName, false);
 					Ray aimRay = base.GetAimRay();
 					float speedOverride = FireMegaFireball.projectileSpeed * 2f;
-					float bonusYaw = (float)Mathf.FloorToInt((float)this.projectilesFired - (float)(TemplarFireMiniRocket.projectileCount - 1) / 2f) / (float)(TemplarFireMiniRocket.projectileCount - 1) * TemplarFireMiniRocket.totalYawSpread;
-					bonusYaw = 0f;
-					Vector3 vector = Util.ApplySpread(aimRay.direction, 0f, 0f, 1f, 1f, bonusYaw, 0f);
+					Vector3 vector = Util.ApplySpread(aimRay.direction, 0f, 0f, 1f, 1f, 0f, 0f);
 					bool flag2 = this.jelly;
 					if (flag2)
 					{

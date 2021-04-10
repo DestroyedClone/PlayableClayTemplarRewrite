@@ -99,7 +99,7 @@ namespace PlayableTemplar.SkillStates
 				owner = base.gameObject,
 				muzzleName = MinigunState.muzzleName,
 				smartCollision = false,
-				procChainMask = default(ProcChainMask),
+				procChainMask = default,
 				procCoefficient = procCoefficient,
 				radius = 0f,
 				sniper = false,

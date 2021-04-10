@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace PlayableTemplar.Modules.Survivors
 {
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
     internal abstract class SurvivorBase
     {
         internal static SurvivorBase instance;

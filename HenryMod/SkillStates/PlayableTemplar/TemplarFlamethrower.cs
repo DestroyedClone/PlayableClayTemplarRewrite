@@ -59,21 +59,23 @@ namespace PlayableTemplar.SkillStates
 			bool flag = base.isAuthority && this.muzzleTransform;
 			if (flag)
 			{
-				BulletAttack bulletAttack = new BulletAttack();
-				bulletAttack.owner = base.gameObject;
-				bulletAttack.weapon = base.gameObject;
-				bulletAttack.origin = this.muzzleTransform.position;
-				bulletAttack.aimVector = this.muzzleTransform.forward;
-				bulletAttack.minSpread = 0f;
-				bulletAttack.maxSpread = TemplarFlamethrower.maxSpread;
-				bulletAttack.damage = this.tickDamageCoefficient * this.damageStat;
-				bulletAttack.force = TemplarFlamethrower.force;
-				bulletAttack.muzzleName = muzzleString;
-				bulletAttack.hitEffectPrefab = Flamebreath.impactEffectPrefab;
-				bulletAttack.isCrit = base.RollCrit();
-				bulletAttack.radius = TemplarFlamethrower.radius;
-				bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
-				LayerIndex background = LayerIndex.background;
+                BulletAttack bulletAttack = new BulletAttack
+                {
+                    owner = base.gameObject,
+                    weapon = base.gameObject,
+                    origin = this.muzzleTransform.position,
+                    aimVector = this.muzzleTransform.forward,
+                    minSpread = 0f,
+                    maxSpread = TemplarFlamethrower.maxSpread,
+                    damage = this.tickDamageCoefficient * this.damageStat,
+                    force = TemplarFlamethrower.force,
+                    muzzleName = muzzleString,
+                    hitEffectPrefab = Flamebreath.impactEffectPrefab,
+                    isCrit = base.RollCrit(),
+                    radius = TemplarFlamethrower.radius,
+                    falloffModel = BulletAttack.FalloffModel.None
+                };
+                LayerIndex background = LayerIndex.background;
 				bulletAttack.stopperMask = background.mask;
 				bulletAttack.procCoefficient = TemplarFlamethrower.procCoefficientPerTick;
 				bulletAttack.maxDistance = TemplarFlamethrower.maxDistance;
