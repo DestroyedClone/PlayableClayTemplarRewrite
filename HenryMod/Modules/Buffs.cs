@@ -20,10 +20,10 @@ namespace PlayableTemplar.Modules
             // fix the buff catalog to actually register our buffs
             IL.RoR2.BuffCatalog.Init += FixBuffCatalog; // remove this hook after next ror2 update as it will have been fixed
 
-            armorBuff = AddNewBuff("PlayableTemplarArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
-            stationaryArmorBuff = AddNewBuff("PlayableTemplarStationaryArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
-            overdriveBuff = AddNewBuff("PlayableTemplarOverdriveBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
-            igniteDebuff = AddNewBuff("PlayableTemplarIgniteBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
+            armorBuff = AddNewBuff("PlayableTemplarArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), StaticValues.BUFF1_COLOR, false, false);
+            stationaryArmorBuff = AddNewBuff("PlayableTemplarStationaryArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), StaticValues.BUFF2_COLOR, false, false);
+            igniteDebuff = AddNewBuff("PlayableTemplarIgniteBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), StaticValues.BUFF3_COLOR, false, true);
+            overdriveBuff = AddNewBuff("PlayableTemplarOverdriveBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), StaticValues.BUFF4_COLOR, false, false);
         }
 
         internal static void FixBuffCatalog(ILContext il)
