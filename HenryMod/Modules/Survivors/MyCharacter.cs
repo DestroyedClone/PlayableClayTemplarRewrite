@@ -23,7 +23,7 @@ namespace HenryMod.Modules.Survivors
             armor = 20f,
             armorGrowth = 0f,
             bodyName = instance.bodyName + "Body",
-            bodyNameToken = HenryPlugin.developerPrefix + "_HENRY_BODY_NAME",
+            bodyNameToken = PlayableTemplarPlugin.developerPrefix + "_HENRY_BODY_NAME",
             bodyColor = Color.grey,
             characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
@@ -32,7 +32,7 @@ namespace HenryMod.Modules.Survivors
             healthRegen = 1.5f,
             jumpCount = 1,
             maxHealth = 110f,
-            subtitleNameToken = HenryPlugin.developerPrefix + "_HENRY_BODY_SUBTITLE",
+            subtitleNameToken = PlayableTemplarPlugin.developerPrefix + "_HENRY_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
@@ -88,7 +88,7 @@ namespace HenryMod.Modules.Survivors
         {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
-            string prefix = HenryPlugin.developerPrefix;
+            string prefix = PlayableTemplarPlugin.developerPrefix;
 
             #region Primary
             Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), "Weapon", prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), true));
@@ -195,7 +195,7 @@ namespace HenryMod.Modules.Survivors
             List<SkinDef> skins = new List<SkinDef>();
 
             #region DefaultSkin
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(HenryPlugin.developerPrefix + "_HENRY_BODY_DEFAULT_SKIN_NAME",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(PlayableTemplarPlugin.developerPrefix + "_HENRY_BODY_DEFAULT_SKIN_NAME",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
                 defaultRenderers,
                 mainRenderer,
@@ -231,7 +231,7 @@ namespace HenryMod.Modules.Survivors
                 masteryMat
             });
 
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(HenryPlugin.developerPrefix + "_HENRY_BODY_MASTERY_SKIN_NAME",
+            SkinDef masterySkin = Modules.Skins.CreateSkinDef(PlayableTemplarPlugin.developerPrefix + "_HENRY_BODY_MASTERY_SKIN_NAME",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
                 masteryRendererInfos,
                 mainRenderer,

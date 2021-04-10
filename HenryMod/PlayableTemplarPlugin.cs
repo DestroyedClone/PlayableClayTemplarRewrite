@@ -7,7 +7,7 @@ using System.Security.Permissions;
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
 
-namespace HenryMod
+namespace PlayableTemplar
 {
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
@@ -19,19 +19,19 @@ namespace HenryMod
         "SoundAPI",
     })]
 
-    public class HenryPlugin : BaseUnityPlugin
+    public class PlayableTemplarPlugin : BaseUnityPlugin
     {
         // if you don't change these you're giving permission to deprecate the mod-
         //  please change the names to your own stuff, thanks
         //   this shouldn't even have to be said
-        public const string MODUID = "com.DeveloperName.MyCharacterMod";
-        public const string MODNAME = "MyCharacterMod";
+        public const string MODUID = "com.AmogusLovers.PlayableClayTemplar";
+        public const string MODNAME = "Playable Clay Templar";
         public const string MODVERSION = "1.0.0";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
-        public const string developerPrefix = "ROB";
+        public const string developerPrefix = "SUS";
 
-        public static HenryPlugin instance;
+        public static PlayableTemplarPlugin instance;
 
         private void Awake()
         {
