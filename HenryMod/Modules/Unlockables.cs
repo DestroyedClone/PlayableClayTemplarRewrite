@@ -9,6 +9,7 @@ using UnityEngine;
 
 namespace PlayableTemplar.Modules
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
     internal static class Unlockables
     {
         private static readonly HashSet<string> usedRewardIds = new HashSet<string>();
@@ -17,6 +18,7 @@ namespace PlayableTemplar.Modules
         private static readonly List<(AchievementDef achDef, UnlockableDef unlockableDef, String unlockableName)> moddedUnlocks = new List<(AchievementDef achDef, UnlockableDef unlockableDef, string unlockableName)>();
 
         private static bool addingUnlockables;
+
         public static bool ableToAdd { get; private set; } = false;
 
         internal static UnlockableDef CreateNewUnlockable(UnlockableInfo unlockableInfo)

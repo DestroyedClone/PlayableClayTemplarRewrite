@@ -8,15 +8,20 @@ using EntityStates;
 
 namespace PlayableTemplar.SkillStates
 {
-	// Token: 0x0200000D RID: 13
 	public class TemplarMinigunState : BaseSkillState
 	{
-		// Token: 0x06000043 RID: 67 RVA: 0x00004598 File Offset: 0x00002798
+		private static readonly BuffIndex slowBuff;
+		private BuffIndex armorBuff;
+		private BuffIndex stationaryArmorBuff;
+		private bool standStill;
+		protected Transform muzzleTransform;
+		private float oldMass;
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			this.armorBuff = PlayableTemplar.instance.armorBuff;
-			this.stationaryArmorBuff = PlayableTemplar.instance.stationaryArmorBuff;
+			this.armorBuff = Modules.Buffs.armorBuff.buffIndex;
+			this.stationaryArmorBuff = Modules.Buffs.stationaryArmorBuff.buffIndex;
 			this.oldMass = base.characterMotor.mass;
 			this.muzzleTransform = base.FindModelChild(MinigunState.muzzleName);
 			bool flag = NetworkServer.active && base.characterBody;
@@ -27,15 +32,14 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x06000044 RID: 68 RVA: 0x00004630 File Offset: 0x00002830
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
 			base.StartAimMode(2.5f, false);
 			base.characterBody.isSprinting = false;
-			bool flag = base.characterMotor.velocity.x == 0f && base.characterMotor.velocity.z == 0f && base.characterMotor.isGrounded;
+			bool isStationary = base.characterMotor.velocity.x == 0f && base.characterMotor.velocity.z == 0f && base.characterMotor.isGrounded;
 			bool isGrounded = base.characterMotor.isGrounded;
-			bool flag2 = flag && isGrounded;
+			bool flag2 = isStationary && isGrounded;
 			if (flag2)
 			{
 				bool flag3 = !base.characterBody.HasBuff(this.stationaryArmorBuff);
@@ -103,23 +107,5 @@ namespace PlayableTemplar.SkillStates
 		{
 			return InterruptPriority.Skill;
 		}
-
-		// Token: 0x04000053 RID: 83
-		private static readonly BuffIndex slowBuff;
-
-		// Token: 0x04000054 RID: 84
-		private BuffIndex armorBuff;
-
-		// Token: 0x04000055 RID: 85
-		private BuffIndex stationaryArmorBuff;
-
-		// Token: 0x04000056 RID: 86
-		private bool standStill;
-
-		// Token: 0x04000057 RID: 87
-		protected Transform muzzleTransform;
-
-		// Token: 0x04000058 RID: 88
-		private float oldMass;
 	}
 }

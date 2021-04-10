@@ -98,7 +98,7 @@ namespace PlayableTemplar.Modules
             }
 
             LanguageAPI.Add(prefix + "SECONDARY_SHOTGUN_NAME", "Blunderbuss");
-            LanguageAPI.Add(prefix + "SECONDARY_SHOTGUN_DESCRIPTION", "Roll a short distance, gaining <style=cIsUtility>300 armor</style>. <style=cIsUtility>You cannot be hit during the roll.</style>");
+            LanguageAPI.Add(prefix + "SECONDARY_SHOTGUN_DESCRIPTION", shotgunText);
             #endregion
 
             #region Utility

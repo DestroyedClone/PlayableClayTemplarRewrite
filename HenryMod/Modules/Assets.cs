@@ -249,12 +249,14 @@ namespace PlayableTemplar.Modules
 
         private static void AddNewEffectDef(GameObject effectPrefab, string soundName)
         {
-            EffectDef newEffectDef = new EffectDef();
-            newEffectDef.prefab = effectPrefab;
-            newEffectDef.prefabEffectComponent = effectPrefab.GetComponent<EffectComponent>();
-            newEffectDef.prefabName = effectPrefab.name;
-            newEffectDef.prefabVfxAttributes = effectPrefab.GetComponent<VFXAttributes>();
-            newEffectDef.spawnSoundEventName = soundName;
+            EffectDef newEffectDef = new EffectDef
+            {
+                prefab = effectPrefab,
+                prefabEffectComponent = effectPrefab.GetComponent<EffectComponent>(),
+                prefabName = effectPrefab.name,
+                prefabVfxAttributes = effectPrefab.GetComponent<VFXAttributes>(),
+                spawnSoundEventName = soundName
+            };
 
             effectDefs.Add(newEffectDef);
         }

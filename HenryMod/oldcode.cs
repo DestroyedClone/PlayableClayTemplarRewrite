@@ -522,27 +522,6 @@ namespace PlayableTemplar
 		{
 		}
 
-		// Token: 0x040000DD RID: 221
-		public const string MODUID = "com.rob.PlayableTemplar";
-
-		// Token: 0x040000DE RID: 222
-		internal static PlayableTemplar instance;
-
-		// Token: 0x040000DF RID: 223
-		public const string characterName = "Clay Templar";
-
-		// Token: 0x040000E0 RID: 224
-		public const string characterSubtitle = "Lost Soldier of Aphelia";
-
-		// Token: 0x040000E1 RID: 225
-		public const string characterOutro = "..and so it left, reveling in its triumph.";
-
-		// Token: 0x040000E2 RID: 226
-		public const string altOutro = "..and so it left, with a nerfed ass rifle.";
-
-		// Token: 0x040000E3 RID: 227
-		public const string characterLore = "\n''le minigunne man :-DDD\n\n";
-
 		// Token: 0x040000E4 RID: 228
 		public GameObject myCharacter;
 
@@ -552,14 +531,6 @@ namespace PlayableTemplar
 		// Token: 0x040000E6 RID: 230
 		public GameObject doppelganger;
 
-		// Token: 0x040000E7 RID: 231
-		public static GameObject templarGrenade;
-
-		// Token: 0x040000E8 RID: 232
-		public static GameObject templarRocket;
-
-		// Token: 0x040000E9 RID: 233
-		public GameObject templarRocketEffect;
 
 
 		// Token: 0x040000F3 RID: 243

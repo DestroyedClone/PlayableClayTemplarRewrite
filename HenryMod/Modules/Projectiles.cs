@@ -13,6 +13,12 @@ namespace PlayableTemplar.Modules
         internal static GameObject templarRocketPrefab;
 
 
+        // copied
+        public static GameObject templarGrenade;
+        public static GameObject templarRocket;
+        public static GameObject templarRocketEffect;
+
+
         internal static void RegisterProjectiles()
         {
             // only separating into separate methods for my sanity
@@ -69,20 +75,20 @@ namespace PlayableTemplar.Modules
             gameObject3.AddComponent<TemplarSeparateFromParent>();
             gameObject3.transform.localScale *= 0.8f;
             templarRocketPrefab.GetComponent<ProjectileController>().ghostPrefab = gameObject2;
-            this.templarRocketEffect = PrefabAPI.InstantiateClone(templarRocketPrefab.GetComponent<ProjectileImpactExplosion>().impactEffect, "TemplarRocketImpact", true, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\cs", "RegisterTemplar", 664);
-            this.templarRocketEffect.AddComponent<NetworkIdentity>();
+            templarRocketEffect = PrefabAPI.InstantiateClone(templarRocketPrefab.GetComponent<ProjectileImpactExplosion>().impactEffect, "TemplarRocketImpact", true, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\cs", "RegisterTemplar", 664);
+            templarRocketEffect.AddComponent<NetworkIdentity>();
             bool value2 = Modules.Config.enableRocketJump.Value;
             if (value2)
             {
-                this.templarRocketEffect.AddComponent<TemplarExplosionForce>();
+                templarRocketEffect.AddComponent<TemplarExplosionForce>();
             }
-            bool flag2 = this.templarRocketEffect.GetComponent<VFXAttributes>();
+            bool flag2 = templarRocketEffect.GetComponent<VFXAttributes>();
             if (flag2)
             {
-                this.templarRocketEffect.GetComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
+                templarRocketEffect.GetComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
             }
-            EffectAPI.AddEffect(this.templarRocketEffect);
-            templarRocketPrefab.GetComponent<ProjectileImpactExplosion>().impactEffect = this.templarRocketEffect;
+            EffectAPI.AddEffect(templarRocketEffect);
+            templarRocketPrefab.GetComponent<ProjectileImpactExplosion>().impactEffect = templarRocketEffect;
             templarRocketPrefab.GetComponent<ProjectileDamage>().damageType = DamageType.BypassOneShotProtection;
         }
 

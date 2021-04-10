@@ -7,20 +7,22 @@ using EntityStates;
 
 namespace PlayableTemplar.SkillStates
 {
-	// Token: 0x02000018 RID: 24
 	public class TemplarChargeMiniRocket : BaseSkillState
 	{
-		// Token: 0x0600007F RID: 127 RVA: 0x000061A4 File Offset: 0x000043A4
+		public static float baseDuration = 1.25f;
+		private float duration;
+		private GameObject chargeInstance;
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
 			this.duration = TemplarChargeMiniRocket.baseDuration / this.attackSpeedStat;
-			Object modelAnimator = base.GetModelAnimator();
+			Animator modelAnimator = base.GetModelAnimator();
 			Transform modelTransform = base.GetModelTransform();
 			base.GetModelAnimator().SetBool("WeaponIsReady", true);
 			base.PlayCrossfade("Gesture, Additive", "FireMinigun", 0.2f);
 			base.characterBody.crosshairPrefab = Resources.Load<GameObject>("prefabs/crosshair/ToolbotGrenadeLauncherCrosshair");
-			Util.PlayScaledSound(ChargeMegaFireball.attackString, base.gameObject, this.attackSpeedStat);
+			Util.PlayAttackSpeedSound(ChargeMegaFireball.attackString, base.gameObject, this.attackSpeedStat);
 			bool flag = modelTransform;
 			if (flag)
 			{
@@ -90,14 +92,5 @@ namespace PlayableTemplar.SkillStates
 		{
 			return InterruptPriority.PrioritySkill;
 		}
-
-		// Token: 0x0400009F RID: 159
-		public static float baseDuration = 1.25f;
-
-		// Token: 0x040000A0 RID: 160
-		private float duration;
-
-		// Token: 0x040000A1 RID: 161
-		private GameObject chargeInstance;
 	}
 }
