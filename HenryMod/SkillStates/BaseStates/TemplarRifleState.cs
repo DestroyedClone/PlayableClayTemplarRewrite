@@ -2,11 +2,12 @@
 using EntityStates.ClayBruiser.Weapon;
 using RoR2;
 using UnityEngine;
+using EntityStates;
 
-namespace EntityStates.Templar
+namespace PlayableTemplar.SkillStates
 {
 	// Token: 0x02000010 RID: 16
-	public class TemplarRifleState : BaseState
+	public class TemplarRifleState : BaseSkillState
 	{
 		// Token: 0x06000054 RID: 84 RVA: 0x00004DBB File Offset: 0x00002FBB
 		public override void OnEnter()

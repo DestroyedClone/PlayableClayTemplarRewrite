@@ -4,8 +4,9 @@ using EntityStates.Squid.SquidWeapon;
 using PlayableTemplar;
 using RoR2;
 using UnityEngine;
+using EntityStates;
 
-namespace EntityStates.Templar
+namespace PlayableTemplar.SkillStates
 {
 	// Token: 0x0200000E RID: 14
 	public class TemplarRifleFire : TemplarRifleState

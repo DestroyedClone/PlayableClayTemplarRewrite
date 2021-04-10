@@ -4,11 +4,12 @@ using EntityStates.Sniper.SniperWeapon;
 using PlayableTemplar;
 using RoR2;
 using UnityEngine;
+using EntityStates;
 
-namespace EntityStates.Templar
+namespace PlayableTemplar.SkillStates
 {
 	// Token: 0x0200001C RID: 28
-	public class TemplarShotgun : BaseState
+	public class TemplarShotgun : BaseSkillState
 	{
 		// Token: 0x0600009B RID: 155 RVA: 0x00006D94 File Offset: 0x00004F94
 		public override void OnEnter()

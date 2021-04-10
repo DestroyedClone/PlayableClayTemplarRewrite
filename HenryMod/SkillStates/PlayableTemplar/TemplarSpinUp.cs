@@ -2,8 +2,9 @@
 using EntityStates.ClayBruiser.Weapon;
 using RoR2;
 using UnityEngine;
+using EntityStates;
 
-namespace EntityStates.Templar
+namespace PlayableTemplar.SkillStates
 {
 	// Token: 0x0200000C RID: 12
 	public class TemplarMinigunSpinUp : TemplarMinigunState

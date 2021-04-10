@@ -3,11 +3,12 @@ using EntityStates.ClayBruiser.Weapon;
 using EntityStates.GolemMonster;
 using RoR2;
 using UnityEngine;
+using EntityStates;
 
-namespace EntityStates.Templar
+namespace PlayableTemplar.SkillStates
 {
 	// Token: 0x02000015 RID: 21
-	public class TemplarFireBeam : BaseState
+	public class TemplarFireBeam : BaseSkillState
 	{
 		// Token: 0x06000070 RID: 112 RVA: 0x00005A8C File Offset: 0x00003C8C
 		public override void OnEnter()

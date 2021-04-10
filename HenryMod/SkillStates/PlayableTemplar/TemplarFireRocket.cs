@@ -5,11 +5,12 @@ using PlayableTemplar;
 using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
+using EntityStates;
 
-namespace EntityStates.Templar
+namespace PlayableTemplar.SkillStates
 {
 	// Token: 0x0200001B RID: 27
-	public class TemplarFireRocket : BaseState
+	public class TemplarFireRocket : BaseSkillState
 	{
 		// Token: 0x06000095 RID: 149 RVA: 0x000069BC File Offset: 0x00004BBC
 		public override void OnEnter()

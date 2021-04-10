@@ -3,8 +3,9 @@ using EntityStates.ClayBoss;
 using PlayableTemplar;
 using RoR2;
 using UnityEngine;
+using EntityStates;
 
-namespace EntityStates.Templar
+namespace PlayableTemplar.SkillStates
 {
 	// Token: 0x02000011 RID: 17
 	public class TemplarOverdrive : BaseSkillState

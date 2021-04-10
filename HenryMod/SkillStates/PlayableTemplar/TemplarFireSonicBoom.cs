@@ -1,8 +1,9 @@
 ﻿using System;
 using EntityStates.Treebot.Weapon;
 using RoR2;
+using EntityStates;
 
-namespace EntityStates.Templar
+namespace PlayableTemplar.SkillStates
 {
 	// Token: 0x02000012 RID: 18
 	public class TemplarFireSonicBoom : FireSonicBoom
@@ -16,7 +17,7 @@ namespace EntityStates.Templar
 		}
 
 		// Token: 0x0600005F RID: 95 RVA: 0x0000503F File Offset: 0x0000323F
-		protected override void AddDebuff(CharacterBody body)
+		public override void AddDebuff(CharacterBody body)
 		{
 			body.AddTimedBuff((BuffIndex)21, this.slowDuration * 3f);
 		}

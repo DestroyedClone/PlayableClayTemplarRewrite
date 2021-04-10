@@ -5,11 +5,12 @@ using EntityStates.ScavMonster;
 using RoR2;
 using RoR2.Skills;
 using UnityEngine;
+using EntityStates;
 
-namespace EntityStates.Templar
+namespace PlayableTemplar.SkillStates
 {
 	// Token: 0x0200001D RID: 29
-	public class TemplarSwapWeapon : BaseState
+	public class TemplarSwapWeapon : BaseSkillState
 	{
 		// Token: 0x060000A1 RID: 161 RVA: 0x00007240 File Offset: 0x00005440
 		public override void OnEnter()

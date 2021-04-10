@@ -4,11 +4,12 @@ using EntityStates.Commando;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
+using EntityStates;
 
-namespace EntityStates.Templar
+namespace PlayableTemplar.SkillStates
 {
 	// Token: 0x0200001E RID: 30
-	public class TemplarSidestep : BaseState
+	public class TemplarSidestep : BaseSkillState
 	{
 		// Token: 0x060000A7 RID: 167 RVA: 0x00007580 File Offset: 0x00005780
 		public override void OnEnter()
@@ -52,7 +53,7 @@ namespace EntityStates.Templar
 			if (flag5)
 			{
 				CharacterMotor characterMotor = base.characterMotor;
-				characterMotor.velocity.y = characterMotor.velocity.y * 0.2f;
+				characterMotor.velocity.y *= 0.2f;
 				base.characterMotor.velocity = this.forwardDirection * this.rollSpeed;
 			}
 			Vector3 b = base.characterMotor ? base.characterMotor.velocity : Vector3.zero;

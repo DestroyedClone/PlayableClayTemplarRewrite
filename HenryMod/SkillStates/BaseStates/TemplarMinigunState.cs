@@ -4,11 +4,12 @@ using PlayableTemplar;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
+using EntityStates;
 
-namespace EntityStates.Templar
+namespace PlayableTemplar.SkillStates
 {
 	// Token: 0x0200000D RID: 13
-	public class TemplarMinigunState : BaseState
+	public class TemplarMinigunState : BaseSkillState
 	{
 		// Token: 0x06000043 RID: 67 RVA: 0x00004598 File Offset: 0x00002798
 		public override void OnEnter()

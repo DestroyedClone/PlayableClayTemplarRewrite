@@ -3,11 +3,12 @@ using EntityStates.ClayBruiser.Weapon;
 using EntityStates.LemurianBruiserMonster;
 using RoR2;
 using UnityEngine;
+using EntityStates;
 
 namespace PlayableTemplar.SkillStates
 {
 	// Token: 0x02000018 RID: 24
-	public class TemplarChargeMiniRocket : BaseState
+	public class TemplarChargeMiniRocket : BaseSkillState
 	{
 		// Token: 0x0600007F RID: 127 RVA: 0x000061A4 File Offset: 0x000043A4
 		public override void OnEnter()
