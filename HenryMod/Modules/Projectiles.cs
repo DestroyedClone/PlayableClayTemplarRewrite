@@ -29,7 +29,7 @@ namespace PlayableTemplar.Modules
 
         private static void CreateGrenade()
         {
-            templarGrenadePrefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/Projectiles/CommandoGrenadeProjectile"), "TemplarGrenadeProjectile", true, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\cs", "RegisterTemplar", 527);
+            templarGrenadePrefab = CloneProjectilePrefab("CommandoGrenadeProjectile", "TemplarGrenadeProjectile");
             templarGrenadePrefab.GetComponent<ProjectileImpactExplosion>().blastDamageCoefficient = Modules.Config.clayGrenadeDamageCoefficient.Value;
             templarGrenadePrefab.GetComponent<ProjectileImpactExplosion>().blastProcCoefficient = Modules.Config.clayGrenadeProcCoefficient.Value;
             templarGrenadePrefab.GetComponent<ProjectileImpactExplosion>().blastRadius = Modules.Config.clayGrenadeRadius.Value;
@@ -44,9 +44,46 @@ namespace PlayableTemplar.Modules
             templarGrenadePrefab.GetComponent<ProjectileController>().ghostPrefab = gameObject;
         }
 
-        private static void Create()
+        private static void CreateRocket()
         {
-
+            templarRocketPrefab = CloneProjectilePrefab("Prefabs/Projectiles/LemurianBigFireball", "TemplarRocketProjectile");
+            templarRocketPrefab.GetComponent<ProjectileImpactExplosion>().blastDamageCoefficient = 1f;
+            templarRocketPrefab.GetComponent<ProjectileImpactExplosion>().blastRadius = Modules.Config.bazookaBlastRadius.Value;
+            templarRocketPrefab.GetComponent<ProjectileImpactExplosion>().blastProcCoefficient = Modules.Config.bazookaProcCoefficient.Value;
+            templarRocketPrefab.GetComponent<ProjectileImpactExplosion>().destroyOnEnemy = true;
+            templarRocketPrefab.GetComponent<ProjectileImpactExplosion>().destroyOnWorld = true;
+            bool flag = templarRocketPrefab.GetComponent<MissileController>() != null;
+            if (flag)
+            {
+                Object.Destroy(templarRocketPrefab.GetComponent<MissileController>());
+            }
+            templarRocketPrefab.AddComponent<TemplarMissileController>();
+            GameObject gameObject2 = PrefabAPI.InstantiateClone(Assets.clayMissileModel, "TemplarMissileModel", true, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\cs", "RegisterTemplar", 580);
+            gameObject2.AddComponent<NetworkIdentity>();
+            gameObject2.AddComponent<ProjectileGhostController>();
+            gameObject2.transform.GetChild(1).SetParent(gameObject2.transform.GetChild(0));
+            gameObject2.transform.GetChild(0).localRotation = Quaternion.Euler(0f, 90f, 0f);
+            gameObject2.transform.GetChild(0).localScale *= 0.5f;
+            gameObject2.transform.GetChild(0).GetChild(0).GetChild(0).SetParent(gameObject2.transform.GetChild(0));
+            GameObject gameObject3 = gameObject2.transform.GetChild(0).GetChild(0).gameObject;
+            gameObject3.AddComponent<TemplarSeparateFromParent>();
+            gameObject3.transform.localScale *= 0.8f;
+            templarRocketPrefab.GetComponent<ProjectileController>().ghostPrefab = gameObject2;
+            this.templarRocketEffect = PrefabAPI.InstantiateClone(templarRocketPrefab.GetComponent<ProjectileImpactExplosion>().impactEffect, "TemplarRocketImpact", true, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\cs", "RegisterTemplar", 664);
+            this.templarRocketEffect.AddComponent<NetworkIdentity>();
+            bool value2 = Modules.Config.enableRocketJump.Value;
+            if (value2)
+            {
+                this.templarRocketEffect.AddComponent<TemplarExplosionForce>();
+            }
+            bool flag2 = this.templarRocketEffect.GetComponent<VFXAttributes>();
+            if (flag2)
+            {
+                this.templarRocketEffect.GetComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
+            }
+            EffectAPI.AddEffect(this.templarRocketEffect);
+            templarRocketPrefab.GetComponent<ProjectileImpactExplosion>().impactEffect = this.templarRocketEffect;
+            templarRocketPrefab.GetComponent<ProjectileDamage>().damageType = DamageType.BypassOneShotProtection;
         }
 
         private static void CreateBomb()
@@ -69,31 +106,20 @@ namespace PlayableTemplar.Modules
             bombController.startSound = "";
         }
 
-        private static void InitializeImpactExplosion(ProjectileImpactExplosion projectileImpactExplosion)
+        // Token: 0x02000029 RID: 41
+        public class TemplarSeparateFromParent : MonoBehaviour
         {
-            projectileImpactExplosion.blastDamageCoefficient = 1f;
-            projectileImpactExplosion.blastProcCoefficient = 1f;
-            projectileImpactExplosion.blastRadius = 1f;
-            projectileImpactExplosion.bonusBlastForce = Vector3.zero;
-            projectileImpactExplosion.childrenCount = 0;
-            projectileImpactExplosion.childrenDamageCoefficient = 0f;
-            projectileImpactExplosion.childrenProjectilePrefab = null;
-            projectileImpactExplosion.destroyOnEnemy = false;
-            projectileImpactExplosion.destroyOnWorld = false;
-            //projectileImpactExplosion.explosionSoundString = "";
-            projectileImpactExplosion.falloffModel = RoR2.BlastAttack.FalloffModel.None;
-            projectileImpactExplosion.fireChildren = false;
-            projectileImpactExplosion.impactEffect = null;
-            projectileImpactExplosion.lifetime = 0f;
-            projectileImpactExplosion.lifetimeAfterImpact = 0f;
-            //projectileImpactExplosion.lifetimeExpiredSoundString = "";
-            projectileImpactExplosion.lifetimeRandomOffset = 0f;
-            projectileImpactExplosion.offsetForLifetimeExpiredSound = 0f;
-            projectileImpactExplosion.timerAfterImpact = false;
+            // Token: 0x060000FC RID: 252 RVA: 0x0001099C File Offset: 0x0000EB9C
+            private void Awake()
+            {
+                base.transform.SetParent(null);
+            }
 
-            projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            // Token: 0x060000FD RID: 253 RVA: 0x000109AC File Offset: 0x0000EBAC
+            public TemplarSeparateFromParent()
+            {
+            }
         }
-
         public class TemplarMissileController : MonoBehaviour
         {
             // Token: 0x060000F8 RID: 248 RVA: 0x0001092C File Offset: 0x0000EB2C
@@ -186,6 +212,30 @@ namespace PlayableTemplar.Modules
         }
 
         // Base Stuff //
+        private static void InitializeImpactExplosion(ProjectileImpactExplosion projectileImpactExplosion)
+        {
+            projectileImpactExplosion.blastDamageCoefficient = 1f;
+            projectileImpactExplosion.blastProcCoefficient = 1f;
+            projectileImpactExplosion.blastRadius = 1f;
+            projectileImpactExplosion.bonusBlastForce = Vector3.zero;
+            projectileImpactExplosion.childrenCount = 0;
+            projectileImpactExplosion.childrenDamageCoefficient = 0f;
+            projectileImpactExplosion.childrenProjectilePrefab = null;
+            projectileImpactExplosion.destroyOnEnemy = false;
+            projectileImpactExplosion.destroyOnWorld = false;
+            //projectileImpactExplosion.explosionSoundString = "";
+            projectileImpactExplosion.falloffModel = RoR2.BlastAttack.FalloffModel.None;
+            projectileImpactExplosion.fireChildren = false;
+            projectileImpactExplosion.impactEffect = null;
+            projectileImpactExplosion.lifetime = 0f;
+            projectileImpactExplosion.lifetimeAfterImpact = 0f;
+            //projectileImpactExplosion.lifetimeExpiredSoundString = "";
+            projectileImpactExplosion.lifetimeRandomOffset = 0f;
+            projectileImpactExplosion.offsetForLifetimeExpiredSound = 0f;
+            projectileImpactExplosion.timerAfterImpact = false;
+
+            projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+        }
 
         private static GameObject CreateGhostPrefab(string ghostName)
         {
