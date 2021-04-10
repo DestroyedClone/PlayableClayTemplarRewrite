@@ -6,30 +6,30 @@ using System.Collections.Generic;
 
 namespace PlayableTemplar.Modules
 {
-    public static class Configg
+    public static class Config
 	{
         #region variables
         public static ConfigEntry<bool> originalSize;
 
 		public static ConfigEntry<bool> oldIcons;
 
-		private static ConfigEntry<bool> bazookaGoBoom;
+		public static ConfigEntry<bool> bazookaGoBoom;
 
-		private static ConfigEntry<bool> disableWeaponSwap;
+		public static ConfigEntry<bool> disableWeaponSwap;
 
-		private static ConfigEntry<float> baseHealth;
+		public static ConfigEntry<float> baseHealth;
 
-		private static ConfigEntry<float> healthGrowth;
+		public static ConfigEntry<float> healthGrowth;
 
-		private static ConfigEntry<float> baseArmor;
+		public static ConfigEntry<float> baseArmor;
 
-		private static ConfigEntry<float> baseDamage;
+		public static ConfigEntry<float> baseDamage;
 
-		private static ConfigEntry<float> damageGrowth;
+		public static ConfigEntry<float> damageGrowth;
 
-		private static ConfigEntry<float> baseRegen;
+		public static ConfigEntry<float> baseRegen;
 
-		private static ConfigEntry<float> regenGrowth;
+		public static ConfigEntry<float> regenGrowth;
 
 		public static ConfigEntry<float> minigunDamageCoefficient;
 
@@ -37,9 +37,9 @@ namespace PlayableTemplar.Modules
 
 		public static ConfigEntry<float> minigunForce;
 
-		private static ConfigEntry<float> minigunArmorBoost;
+		public static ConfigEntry<float> minigunArmorBoost;
 
-		private static ConfigEntry<float> minigunStationaryArmorBoost;
+		public static ConfigEntry<float> minigunStationaryArmorBoost;
 
 		public static ConfigEntry<float> minigunMinFireRate;
 
@@ -55,21 +55,21 @@ namespace PlayableTemplar.Modules
 
 		public static ConfigEntry<float> rifleFireRate;
 
-		private static ConfigEntry<int> clayGrenadeStock;
+		public static ConfigEntry<int> clayGrenadeStock;
 
-		private static ConfigEntry<float> clayGrenadeCooldown;
+		public static ConfigEntry<float> clayGrenadeCooldown;
 
-		private static ConfigEntry<float> clayGrenadeDamageCoefficient;
+		public static ConfigEntry<float> clayGrenadeDamageCoefficient;
 
-		private static ConfigEntry<float> clayGrenadeProcCoefficient;
+		public static ConfigEntry<float> clayGrenadeProcCoefficient;
 
-		private static ConfigEntry<float> clayGrenadeRadius;
+		public static ConfigEntry<float> clayGrenadeRadius;
 
-		private static ConfigEntry<float> clayGrenadeDetonationTime;
+		public static ConfigEntry<float> clayGrenadeDetonationTime;
 
-		private static ConfigEntry<int> blunderbussStock;
+		public static ConfigEntry<int> blunderbussStock;
 
-		private static ConfigEntry<float> blunderbussCooldown;
+		public static ConfigEntry<float> blunderbussCooldown;
 
 		public static ConfigEntry<int> blunderbussPelletCount;
 
@@ -79,37 +79,37 @@ namespace PlayableTemplar.Modules
 
 		public static ConfigEntry<float> blunderbussSpread;
 
-		private static ConfigEntry<int> tarStock;
+		public static ConfigEntry<int> tarStock;
 
-		private static ConfigEntry<float> tarCooldown;
+		public static ConfigEntry<float> tarCooldown;
 
-		private static ConfigEntry<int> overdriveStock;
+		public static ConfigEntry<int> overdriveStock;
 
-		private static ConfigEntry<float> overdriveCooldown;
+		public static ConfigEntry<float> overdriveCooldown;
 
-		private static ConfigEntry<int> dashStock;
+		public static ConfigEntry<int> dashStock;
 
-		private static ConfigEntry<float> dashCooldown;
+		public static ConfigEntry<float> dashCooldown;
 
-		private static ConfigEntry<int> bazookaStock;
+		public static ConfigEntry<int> bazookaStock;
 
-		private static ConfigEntry<float> bazookaCooldown;
+		public static ConfigEntry<float> bazookaCooldown;
 
 		public static ConfigEntry<float> bazookaDamageCoefficient;
 
-		private static ConfigEntry<float> bazookaProcCoefficient;
+		public static ConfigEntry<float> bazookaProcCoefficient;
 
-		private static ConfigEntry<float> bazookaBlastRadius;
+		public static ConfigEntry<float> bazookaBlastRadius;
 
 		public static ConfigEntry<float> miniBazookaDamageCoefficient;
 
 		public static ConfigEntry<bool> jellyfishEvent;
 
-		private static ConfigEntry<bool> enableDunestrider;
+		public static ConfigEntry<bool> enableDunestrider;
 
-		private static ConfigEntry<bool> enableRocketJump;
+		public static ConfigEntry<bool> enableRocketJump;
 
-		private static ConfigEntry<bool> masochism;
+		public static ConfigEntry<bool> masochism;
 		#endregion
 		public static void ReadConfig()
         {//base.config.bind

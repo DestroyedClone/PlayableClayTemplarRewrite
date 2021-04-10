@@ -9,11 +9,15 @@ namespace PlayableTemplar.Modules
     internal static class Projectiles
     {
         internal static GameObject bombPrefab;
+        internal static GameObject templarGrenadePrefab;
+        internal static GameObject templarRocketPrefab;
+
 
         internal static void RegisterProjectiles()
         {
             // only separating into separate methods for my sanity
             CreateBomb();
+            CreateGrenade();
 
             AddProjectile(bombPrefab);
         }
@@ -21,6 +25,28 @@ namespace PlayableTemplar.Modules
         internal static void AddProjectile(GameObject projectileToAdd)
         {
             Modules.Prefabs.projectilePrefabs.Add(projectileToAdd);
+        }
+
+        private static void CreateGrenade()
+        {
+            templarGrenadePrefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/Projectiles/CommandoGrenadeProjectile"), "TemplarGrenadeProjectile", true, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\cs", "RegisterTemplar", 527);
+            templarGrenadePrefab.GetComponent<ProjectileImpactExplosion>().blastDamageCoefficient = Modules.Config.clayGrenadeDamageCoefficient.Value;
+            templarGrenadePrefab.GetComponent<ProjectileImpactExplosion>().blastProcCoefficient = Modules.Config.clayGrenadeProcCoefficient.Value;
+            templarGrenadePrefab.GetComponent<ProjectileImpactExplosion>().blastRadius = Modules.Config.clayGrenadeRadius.Value;
+            templarGrenadePrefab.GetComponent<ProjectileImpactExplosion>().falloffModel = BlastAttack.FalloffModel.Linear;
+            templarGrenadePrefab.GetComponent<ProjectileImpactExplosion>().lifetimeAfterImpact = Modules.Config.clayGrenadeDetonationTime.Value;
+            templarGrenadePrefab.GetComponent<ProjectileImpactExplosion>().impactEffect = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/ExplosivePotExplosion");
+            templarGrenadePrefab.GetComponent<ProjectileDamage>().damageType = DamageType.ClayGoo;
+            GameObject gameObject = PrefabAPI.InstantiateClone(Assets.clayBombModel, "TemplarBombModel");
+            gameObject.AddComponent<NetworkIdentity>();
+            gameObject.AddComponent<ProjectileGhostController>();
+            gameObject.transform.GetChild(0).localScale *= 0.5f;
+            templarGrenadePrefab.GetComponent<ProjectileController>().ghostPrefab = gameObject;
+        }
+
+        private static void Create()
+        {
+
         }
 
         private static void CreateBomb()
@@ -54,13 +80,13 @@ namespace PlayableTemplar.Modules
             projectileImpactExplosion.childrenProjectilePrefab = null;
             projectileImpactExplosion.destroyOnEnemy = false;
             projectileImpactExplosion.destroyOnWorld = false;
-            projectileImpactExplosion.explosionSoundString = "";
+            //projectileImpactExplosion.explosionSoundString = "";
             projectileImpactExplosion.falloffModel = RoR2.BlastAttack.FalloffModel.None;
             projectileImpactExplosion.fireChildren = false;
             projectileImpactExplosion.impactEffect = null;
             projectileImpactExplosion.lifetime = 0f;
             projectileImpactExplosion.lifetimeAfterImpact = 0f;
-            projectileImpactExplosion.lifetimeExpiredSoundString = "";
+            //projectileImpactExplosion.lifetimeExpiredSoundString = "";
             projectileImpactExplosion.lifetimeRandomOffset = 0f;
             projectileImpactExplosion.offsetForLifetimeExpiredSound = 0f;
             projectileImpactExplosion.timerAfterImpact = false;
@@ -74,13 +100,13 @@ namespace PlayableTemplar.Modules
             private void Awake()
             {
                 this.rb = base.GetComponentInChildren<Rigidbody>();
-                this.speed = PlayableTemplar.TemplarMissileController.startSpeed;
+                this.speed = TemplarMissileController.startSpeed;
             }
 
             // Token: 0x060000F9 RID: 249 RVA: 0x00010946 File Offset: 0x0000EB46
             private void FixedUpdate()
             {
-                this.speed += PlayableTemplar.TemplarMissileController.acceleration;
+                this.speed += TemplarMissileController.acceleration;
                 this.rb.velocity = base.transform.forward * this.speed;
             }
 
