@@ -117,24 +117,24 @@ namespace PlayableTemplar
 											}
 											BlastAttack blastAttack = new BlastAttack
 											{
-												attacker = di.inflictor,
+												attacker = di.attacker,
 												inflictor = di.inflictor,
-												teamIndex = TeamIndex.Player,
+												teamIndex = attackerCharacterBody.teamComponent ? attackerCharacterBody.teamComponent.teamIndex : TeamIndex.Player,
 												baseForce = 0f,
 												position = self.transform.position,
 												radius = 12f,
 												falloffModel = BlastAttack.FalloffModel.None,
 												crit = di.crit,
 												baseDamage = di.damage * 0.2f,
-												procCoefficient = di.procCoefficient
+												procCoefficient = di.procCoefficient,
 											};
 											blastAttack.damageType |= DamageType.Stun1s;
 											blastAttack.Fire();
 											BlastAttack blastAttack2 = new BlastAttack
 											{
-												attacker = di.inflictor,
+												attacker = di.attacker,
 												inflictor = di.inflictor,
-												teamIndex = TeamIndex.Player,
+												teamIndex = attackerCharacterBody.teamComponent ? attackerCharacterBody.teamComponent.teamIndex : TeamIndex.Player,
 												baseForce = 0f,
 												position = self.transform.position,
 												radius = 16f,
@@ -154,14 +154,13 @@ namespace PlayableTemplar
 									}
 									else
 									{
-										bool flag19 = di.damageType.HasFlag(DamageType.ClayGoo);
-										bool flag20 = flag19;
-										if (flag20)
+										bool hasGoo = di.damageType.HasFlag(DamageType.ClayGoo);
+										if (hasGoo)
 										{
 											di.damageType = DamageType.Generic;
 											self.GetComponent<CharacterBody>().AddTimedBuff((BuffIndex)21, 4f);
 										}
-										bool flag21 = di.procCoefficient == PlayableTemplar.rifleProcCoefficient.Value;
+										bool flag21 = di.procCoefficient == Modules.Config.rifleProcCoefficient.Value;
 										bool flag22 = flag21;
 										if (flag22)
 										{
@@ -192,12 +191,12 @@ namespace PlayableTemplar
 			bool flag = self && self.HasBuff(Modules.Buffs.armorBuff);
 			if (flag)
 			{
-				self.armor + Modules.Config.minigunArmorBoost.Value;
+				self.armor += Modules.Config.minigunArmorBoost.Value;
 			}
 			bool flag2 = self && self.HasBuff(Modules.Buffs.stationaryArmorBuff);
 			if (flag2)
 			{
-				self.armor + PlayableTemplar.minigunStationaryArmorBoost.Value;
+				self.armor += Modules.Config.minigunStationaryArmorBoost.Value;
 			}
 			bool flag3 = self && self.HasBuff(Modules.Buffs.overdriveBuff);
 			if (flag3)
