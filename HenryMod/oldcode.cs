@@ -24,7 +24,6 @@ namespace PlayableTemplar
 		{
 			this.myCharacter = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterBodies/ClayBruiserBody"), "TemplarBody", true, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\PlayableTemplar.cs", "RegisterTemplar", 468);
 			CharacterBody component = this.myCharacter.GetComponent<CharacterBody>();
-			component.portraitIcon = Assets.templarIconOld;
 			bool value = PlayableTemplar.originalSize.Value;
 			if (value)
 			{
@@ -61,15 +60,6 @@ namespace PlayableTemplar
 			component.name = "TemplarBody";
 			component.baseNameToken = "TEMPLAR_NAME";
 			component.subtitleNameToken = "TEMPLAR_SUBTITLE";
-			component.crosshairPrefab = Resources.Load<GameObject>("Prefabs/Crosshair/SimpleDotCrosshair");
-			component.baseMaxHealth = PlayableTemplar.baseHealth.Value;
-			component.levelMaxHealth = PlayableTemplar.healthGrowth.Value;
-			component.baseRegen = PlayableTemplar.baseRegen.Value;
-			component.levelRegen = PlayableTemplar.regenGrowth.Value;
-			component.baseDamage = PlayableTemplar.baseDamage.Value;
-			component.levelDamage = PlayableTemplar.damageGrowth.Value;
-			component.baseArmor = PlayableTemplar.baseArmor.Value;
-			component.baseCrit = 1f;
 		}
 
 

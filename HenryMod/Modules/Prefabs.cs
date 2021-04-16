@@ -148,6 +148,8 @@ namespace PlayableTemplar.Modules
             bodyComponent.SetSpreadBloom(0f, false);
             bodyComponent.spreadBloomCurve = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CharacterBody>().spreadBloomCurve;
             bodyComponent.spreadBloomDecayTime = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CharacterBody>().spreadBloomDecayTime;
+            bodyComponent.crosshairPrefab = Resources.Load<GameObject>("Prefabs/Crosshair/SimpleDotCrosshair");
+            bodyComponent.baseCrit = 1f;
 
             #endregion
 

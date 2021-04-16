@@ -72,46 +72,39 @@ namespace PlayableTemplar
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo di)
         {
             orig(self, di);
-			bool flag = di.inflictor != null;
-			bool flag2 = flag;
-			if (flag2)
+			if (di.inflictor)
 			{
-				bool flag3 = self != null;
-				bool flag4 = flag3;
-				if (flag4)
+				if (self)
 				{
-					bool flag5 = self.GetComponent<CharacterBody>() != null;
-					bool flag6 = flag5;
-					if (flag6)
+					var selfCharacterBody = self.GetComponent<CharacterBody>();
+					if (selfCharacterBody)
 					{
-						bool flag7 = di.attacker != null;
-						bool flag8 = flag7;
-						if (flag8)
+						if (di.attacker)
 						{
-							bool flag9 = di.attacker.GetComponent<CharacterBody>() != null;
-							bool flag10 = flag9;
-							if (flag10)
+							var attackerCharacterBody = di.attacker.GetComponent<CharacterBody>();
+							if (attackerCharacterBody)
 							{
-								bool flag11 = di.attacker.GetComponent<CharacterBody>().baseNameToken == "TEMPLAR_NAME" || di.attacker.GetComponent<CharacterBody>().baseNameToken == "CLAYMAN_NAME";
-								bool flag12 = flag11;
-								if (flag12)
+								bool attackerIsTemplar = di.attacker.GetComponent<CharacterBody>().baseNameToken == "TEMPLAR_NAME";
+								if (attackerIsTemplar)
 								{
-									bool flag13 = di.damageType.HasFlag(DamageType.BypassOneShotProtection);
-									bool flag14 = flag13;
-									if (flag14)
+									bool validDamageType = di.damageType.HasFlag(DamageType.BypassOneShotProtection);
+									if (validDamageType)
 									{
 										di.damageType = DamageType.AOE;
-										bool flag15 = self.GetComponent<CharacterBody>().HasBuff((BuffIndex)21) && !self.GetComponent<CharacterBody>().HasBuff(PlayableTemplar.instance.igniteDebuff);
-										bool flag16 = flag15;
-										if (flag16)
+
+										//var buff21 = ArrayUtils.GetSafe<int>(characterBody.buffs, 21) > 0;
+										//TODO: https://discordapp.com/channels/562704639141740588/562704639569428506/832713043158892596
+										bool flag15 = selfCharacterBody.HasBuff((BuffIndex)21) && !selfCharacterBody.HasBuff(Modules.Buffs.igniteDebuff);
+										if (flag15)
 										{
-											self.GetComponent<CharacterBody>().AddTimedBuff(PlayableTemplar.instance.igniteDebuff, 16f);
-											bool flag17 = self.GetComponent<CharacterBody>().modelLocator;
-											if (flag17)
+											selfCharacterBody.AddTimedBuff(Modules.Buffs.igniteDebuff, 16f);
+
+											var modelLocator = self.GetComponent<CharacterBody>().modelLocator;
+											if (modelLocator)
 											{
-												Transform modelTransform = self.GetComponent<CharacterBody>().modelLocator.modelTransform;
-												bool flag18 = modelTransform.GetComponent<CharacterModel>();
-												if (flag18)
+												Transform modelTransform = modelLocator.modelTransform;
+												var characterModel = modelTransform.GetComponent<CharacterModel>();
+												if (characterModel)
 												{
 													TemporaryOverlay temporaryOverlay = modelTransform.gameObject.AddComponent<TemporaryOverlay>();
 													temporaryOverlay.duration = 16f;
@@ -119,7 +112,7 @@ namespace PlayableTemplar
 													temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
 													temporaryOverlay.destroyComponentOnEnd = true;
 													temporaryOverlay.originalMaterial = Resources.Load<Material>("Materials/matDoppelganger");
-													temporaryOverlay.AddToCharacerModel(modelTransform.GetComponent<CharacterModel>());
+													temporaryOverlay.AddToCharacerModel(characterModel);
 												}
 											}
 											BlastAttack blastAttack = new BlastAttack

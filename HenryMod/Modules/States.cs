@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using PlayableTemplar.SkillStates;
+using System.Collections.Generic;
 using System;
 using MonoMod.RuntimeDetour;
 using EntityStates;
 using RoR2;
 using System.Reflection;
 
-namespace PlayableTemplar.SkillStates
+namespace PlayableTemplar.Modules
 {
     public static class States
     {
