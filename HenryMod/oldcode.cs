@@ -8,8 +8,6 @@ using On.RoR2;
 using R2API;
 using R2API.Utils;
 using RoR2;
-using RoR2.Navigation;
-using RoR2.Projectile;
 using RoR2.Skills;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -395,17 +393,6 @@ namespace PlayableTemplar
 			component.passiveSkill.skillNameToken = "TEMPLAR_PASSIVE_NAME";
 			component.passiveSkill.skillDescriptionToken = "TEMPLAR_PASSIVE_DESCRIPTION";
 			component.passiveSkill.icon = Assets.iconP;
-		}
-
-		// Token: 0x060000C5 RID: 197 RVA: 0x0000EF68 File Offset: 0x0000D168
-		private void CreateMaster()
-		{
-			this.doppelganger = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterMasters/CommandoMonsterMaster"), "TemplarMonsterMaster", true, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\PlayableTemplar.cs", "CreateMaster", 3280);
-			this.doppelganger.GetComponent<CharacterMaster>().bodyPrefab = this.myCharacter;
-			MasterCatalog.getAdditionalEntries += delegate (List<GameObject> list)
-			{
-				list.Add(this.doppelganger);
-			};
 		}
 
 		// Token: 0x060000C6 RID: 198 RVA: 0x0000EFC8 File Offset: 0x0000D1C8

@@ -56,7 +56,7 @@ namespace PlayableTemplar.Modules.Survivors
 
         internal override void InitializeDoppelganger()
         {
-            Modules.Prefabs.CreateGenericDoppelganger(bodyPrefab, bodyName + "MonsterMaster", "Merc");
+            Modules.Prefabs.CreateGenericDoppelganger(bodyPrefab, bodyName + "MonsterMaster", "Commando");
         }
 
         internal override void InitializeHitboxes()
