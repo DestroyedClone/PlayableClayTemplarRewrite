@@ -6,10 +6,11 @@ using EntityStates;
 
 namespace PlayableTemplar.SkillStates
 {
-	// Token: 0x0200000C RID: 12
 	public class TemplarMinigunSpinUp : TemplarMinigunState
 	{
-		// Token: 0x0600003F RID: 63 RVA: 0x00004424 File Offset: 0x00002624
+		private GameObject chargeInstance;
+		private float duration;
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
@@ -21,7 +22,7 @@ namespace PlayableTemplar.SkillStates
 			bool flag = this.muzzleTransform && MinigunSpinUp.chargeEffectPrefab;
 			if (flag)
 			{
-				this.chargeInstance = Object.Instantiate<GameObject>(MinigunSpinUp.chargeEffectPrefab, this.muzzleTransform.position, this.muzzleTransform.rotation);
+				this.chargeInstance = UnityEngine.Object.Instantiate<GameObject>(MinigunSpinUp.chargeEffectPrefab, this.muzzleTransform.position, this.muzzleTransform.rotation);
 				this.chargeInstance.transform.parent = this.muzzleTransform;
 				ScaleParticleSystemDuration component = this.chargeInstance.GetComponent<ScaleParticleSystemDuration>();
 				bool flag2 = component;
@@ -32,7 +33,6 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x06000040 RID: 64 RVA: 0x00004518 File Offset: 0x00002718
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
@@ -43,7 +43,6 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x06000041 RID: 65 RVA: 0x0000455C File Offset: 0x0000275C
 		public override void OnExit()
 		{
 			base.OnExit();
@@ -54,10 +53,5 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x04000051 RID: 81
-		private GameObject chargeInstance;
-
-		// Token: 0x04000052 RID: 82
-		private float duration;
 	}
 }

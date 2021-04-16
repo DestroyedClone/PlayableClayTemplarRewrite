@@ -8,10 +8,22 @@ using EntityStates;
 
 namespace PlayableTemplar.SkillStates
 {
-	// Token: 0x0200001C RID: 28
 	public class TemplarShotgun : BaseSkillState
 	{
-		// Token: 0x0600009B RID: 155 RVA: 0x00006D94 File Offset: 0x00004F94
+		public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerCommandoBoost");
+		public static float damageCoefficient = Modules.Config.blunderbussDamageCoefficient.Value;
+		public static float force = 5f;
+		public static float bulletRadius = 1.5f;
+		public static float baseMaxDuration = 0.75f;
+		public static float baseMinDuration = 0.5f;
+		public static float recoilAmplitude = 5f;
+		public static float spreadBloomValue = Modules.Config.blunderbussSpread.Value;
+		public static uint pelletCount = (uint)Modules.Config.blunderbussPelletCount.Value;
+		public static float procCoefficient = Modules.Config.blunderbussProcCoefficient.Value;
+		private float maxDuration;
+		private float minDuration;
+		private bool buttonReleased;
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
@@ -21,7 +33,7 @@ namespace PlayableTemplar.SkillStates
 			this.minDuration = TemplarShotgun.baseMinDuration / this.attackSpeedStat;
 			Ray aimRay = base.GetAimRay();
 			base.StartAimMode(2f, false);
-			Util.PlayScaledSound(FireRifle.attackSoundString, base.gameObject, 0.8f);
+			Util.PlayAttackSpeedSound(FireRifle.attackSoundString, base.gameObject, 0.8f);
 			base.GetModelAnimator().SetBool("WeaponIsReady", true);
 			base.PlayCrossfade("Gesture, Additive", "FireMinigun", 0.2f);
 			string muzzleName = MinigunState.muzzleName;
@@ -89,8 +101,7 @@ namespace PlayableTemplar.SkillStates
 				base.characterBody.AddSpreadBloom(TemplarShotgun.spreadBloomValue);
 			}
 		}
-
-		// Token: 0x0600009C RID: 156 RVA: 0x000070D7 File Offset: 0x000052D7
+		
 		public override void OnExit()
 		{
 			base.OnExit();
@@ -98,7 +109,6 @@ namespace PlayableTemplar.SkillStates
 			base.GetModelAnimator().SetBool("WeaponIsReady", false);
 		}
 
-		// Token: 0x0600009D RID: 157 RVA: 0x0000710C File Offset: 0x0000530C
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
@@ -111,7 +121,6 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x0600009E RID: 158 RVA: 0x0000716C File Offset: 0x0000536C
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			bool flag = this.buttonReleased && base.fixedAge >= this.minDuration;
@@ -127,44 +136,5 @@ namespace PlayableTemplar.SkillStates
 			}
 			return result;
 		}
-
-		// Token: 0x040000BF RID: 191
-		public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerCommandoBoost");
-
-		// Token: 0x040000C0 RID: 192
-		public static float damageCoefficient = PlayableTemplar.blunderbussDamageCoefficient.Value;
-
-		// Token: 0x040000C1 RID: 193
-		public static float force = 5f;
-
-		// Token: 0x040000C2 RID: 194
-		public static float bulletRadius = 1.5f;
-
-		// Token: 0x040000C3 RID: 195
-		public static float baseMaxDuration = 0.75f;
-
-		// Token: 0x040000C4 RID: 196
-		public static float baseMinDuration = 0.5f;
-
-		// Token: 0x040000C5 RID: 197
-		public static float recoilAmplitude = 5f;
-
-		// Token: 0x040000C6 RID: 198
-		public static float spreadBloomValue = PlayableTemplar.blunderbussSpread.Value;
-
-		// Token: 0x040000C7 RID: 199
-		public static uint pelletCount = (uint)PlayableTemplar.blunderbussPelletCount.Value;
-
-		// Token: 0x040000C8 RID: 200
-		public static float procCoefficient = PlayableTemplar.blunderbussProcCoefficient.Value;
-
-		// Token: 0x040000C9 RID: 201
-		private float maxDuration;
-
-		// Token: 0x040000CA RID: 202
-		private float minDuration;
-
-		// Token: 0x040000CB RID: 203
-		private bool buttonReleased;
 	}
 }

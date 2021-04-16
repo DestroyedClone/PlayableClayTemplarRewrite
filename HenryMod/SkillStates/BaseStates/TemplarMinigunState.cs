@@ -13,7 +13,7 @@ namespace PlayableTemplar.SkillStates
 		private static readonly BuffIndex slowBuff;
 		private BuffIndex armorBuff;
 		private BuffIndex stationaryArmorBuff;
-		private bool standStill;
+		private readonly bool standStill;
 		protected Transform muzzleTransform;
 		private float oldMass;
 
@@ -70,7 +70,6 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x06000045 RID: 69 RVA: 0x0000476C File Offset: 0x0000296C
 		public override void OnExit()
 		{
 			bool flag = NetworkServer.active && base.characterBody;
@@ -92,8 +91,6 @@ namespace PlayableTemplar.SkillStates
 			base.OnExit();
 		}
 
-		// Token: 0x17000001 RID: 1
-		// (get) Token: 0x06000046 RID: 70 RVA: 0x00004804 File Offset: 0x00002A04
 		protected ref InputBankTest.ButtonState skillButtonState
 		{
 			get
@@ -102,7 +99,6 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x06000047 RID: 71 RVA: 0x00004824 File Offset: 0x00002A24
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.Skill;

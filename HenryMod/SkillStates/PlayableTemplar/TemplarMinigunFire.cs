@@ -7,10 +7,23 @@ using EntityStates;
 
 namespace PlayableTemplar.SkillStates
 {
-	// Token: 0x0200000A RID: 10
 	public class TemplarMinigunFire : TemplarMinigunState
 	{
-		// Token: 0x06000034 RID: 52 RVA: 0x00003E98 File Offset: 0x00002098
+		public static float baseDamageCoefficient = Modules.Config.minigunDamageCoefficient.Value;
+		public static float baseForce = Modules.Config.minigunForce.Value;
+		public static float baseProcCoefficient = Modules.Config.minigunProcCoefficient.Value;
+		public static float recoilAmplitude = 2f;
+		public static float minFireRate = Modules.Config.minigunMinFireRate.Value;
+		public static float maxFireRate = Modules.Config.minigunMaxFireRate.Value;
+		public static float fireRateGrowth = Modules.Config.minigunFireRateGrowth.Value;
+		private float fireTimer;
+		private Transform muzzleVfxTransform;
+		private float baseFireRate;
+		private float baseBulletsPerSecond;
+		private Run.FixedTimeStamp critEndTime;
+		private Run.FixedTimeStamp lastCritCheck;
+		private float currentFireRate;
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
@@ -28,7 +41,6 @@ namespace PlayableTemplar.SkillStates
 			base.PlayCrossfade("Gesture, Additive", "FireMinigun", 0.2f);
 		}
 
-		// Token: 0x06000035 RID: 53 RVA: 0x00003F54 File Offset: 0x00002154
 		private void UpdateCrits()
 		{
 			this.critStat = base.characterBody.crit;
@@ -44,7 +56,6 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x06000036 RID: 54 RVA: 0x00003FBC File Offset: 0x000021BC
 		public override void OnExit()
 		{
 			Util.PlaySound(MinigunFire.endSound, base.gameObject);
@@ -58,7 +69,6 @@ namespace PlayableTemplar.SkillStates
 			base.OnExit();
 		}
 
-		// Token: 0x06000037 RID: 55 RVA: 0x00004024 File Offset: 0x00002224
 		private void OnFireShared()
 		{
 			Util.PlaySound(MinigunFire.fireSound, base.gameObject);
@@ -69,7 +79,6 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x06000038 RID: 56 RVA: 0x00004058 File Offset: 0x00002258
 		private void OnFireAuthority()
 		{
 			this.UpdateCrits();
@@ -114,7 +123,6 @@ namespace PlayableTemplar.SkillStates
 			}.Fire();
 		}
 
-		// Token: 0x06000039 RID: 57 RVA: 0x00004224 File Offset: 0x00002424
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
@@ -135,47 +143,5 @@ namespace PlayableTemplar.SkillStates
 				this.outer.SetNextState(new TemplarMinigunSpinDown());
 			}
 		}
-
-		// Token: 0x04000042 RID: 66
-		public static float baseDamageCoefficient = PlayableTemplar.minigunDamageCoefficient.Value;
-
-		// Token: 0x04000043 RID: 67
-		public static float baseForce = PlayableTemplar.minigunForce.Value;
-
-		// Token: 0x04000044 RID: 68
-		public static float baseProcCoefficient = PlayableTemplar.minigunProcCoefficient.Value;
-
-		// Token: 0x04000045 RID: 69
-		public static float recoilAmplitude = 2f;
-
-		// Token: 0x04000046 RID: 70
-		public static float minFireRate = PlayableTemplar.minigunMinFireRate.Value;
-
-		// Token: 0x04000047 RID: 71
-		public static float maxFireRate = PlayableTemplar.minigunMaxFireRate.Value;
-
-		// Token: 0x04000048 RID: 72
-		public static float fireRateGrowth = PlayableTemplar.minigunFireRateGrowth.Value;
-
-		// Token: 0x04000049 RID: 73
-		private float fireTimer;
-
-		// Token: 0x0400004A RID: 74
-		private Transform muzzleVfxTransform;
-
-		// Token: 0x0400004B RID: 75
-		private float baseFireRate;
-
-		// Token: 0x0400004C RID: 76
-		private float baseBulletsPerSecond;
-
-		// Token: 0x0400004D RID: 77
-		private Run.FixedTimeStamp critEndTime;
-
-		// Token: 0x0400004E RID: 78
-		private Run.FixedTimeStamp lastCritCheck;
-
-		// Token: 0x0400004F RID: 79
-		private float currentFireRate;
 	}
 }

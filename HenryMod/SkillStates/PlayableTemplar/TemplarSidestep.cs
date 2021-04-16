@@ -8,10 +8,18 @@ using EntityStates;
 
 namespace PlayableTemplar.SkillStates
 {
-	// Token: 0x0200001E RID: 30
 	public class TemplarSidestep : BaseSkillState
 	{
-		// Token: 0x060000A7 RID: 167 RVA: 0x00007580 File Offset: 0x00005780
+		[SerializeField]
+		public float duration = 0.3f;
+		public static GameObject dodgeEffect;
+		public static float initialSpeedCoefficient = 10f;
+		public static float finalSpeedCoefficient = 0.25f;
+		private float rollSpeed;
+		private Vector3 forwardDirection;
+		private Animator animator;
+		private Vector3 previousPosition;
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
@@ -45,7 +53,7 @@ namespace PlayableTemplar.SkillStates
 				bool flag4 = transform;
 				if (flag4)
 				{
-					Object.Instantiate<GameObject>(SpawnState.spawnEffectPrefab, transform);
+					UnityEngine.Object.Instantiate<GameObject>(SpawnState.spawnEffectPrefab, transform);
 				}
 			}
 			this.RecalculateSpeed();
@@ -60,13 +68,11 @@ namespace PlayableTemplar.SkillStates
 			this.previousPosition = base.transform.position - b;
 		}
 
-		// Token: 0x060000A8 RID: 168 RVA: 0x000077ED File Offset: 0x000059ED
 		private void RecalculateSpeed()
 		{
 			this.rollSpeed = (4f + 0.3f * this.moveSpeedStat) * Mathf.Lerp(TemplarSidestep.initialSpeedCoefficient, TemplarSidestep.finalSpeedCoefficient, base.fixedAge / this.duration);
 		}
 
-		// Token: 0x060000A9 RID: 169 RVA: 0x00007828 File Offset: 0x00005A28
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
@@ -96,7 +102,6 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x060000AA RID: 170 RVA: 0x00007978 File Offset: 0x00005B78
 		public override void OnExit()
 		{
 			bool flag = base.cameraTargetParams;
@@ -107,43 +112,16 @@ namespace PlayableTemplar.SkillStates
 			base.OnExit();
 		}
 
-		// Token: 0x060000AB RID: 171 RVA: 0x000079AE File Offset: 0x00005BAE
 		public override void OnSerialize(NetworkWriter writer)
 		{
 			base.OnSerialize(writer);
 			writer.Write(this.forwardDirection);
 		}
 
-		// Token: 0x060000AC RID: 172 RVA: 0x000079C6 File Offset: 0x00005BC6
 		public override void OnDeserialize(NetworkReader reader)
 		{
 			base.OnDeserialize(reader);
 			this.forwardDirection = reader.ReadVector3();
 		}
-
-		// Token: 0x040000D5 RID: 213
-		[SerializeField]
-		public float duration = 0.3f;
-
-		// Token: 0x040000D6 RID: 214
-		public static GameObject dodgeEffect;
-
-		// Token: 0x040000D7 RID: 215
-		public static float initialSpeedCoefficient = 10f;
-
-		// Token: 0x040000D8 RID: 216
-		public static float finalSpeedCoefficient = 0.25f;
-
-		// Token: 0x040000D9 RID: 217
-		private float rollSpeed;
-
-		// Token: 0x040000DA RID: 218
-		private Vector3 forwardDirection;
-
-		// Token: 0x040000DB RID: 219
-		private Animator animator;
-
-		// Token: 0x040000DC RID: 220
-		private Vector3 previousPosition;
 	}
 }

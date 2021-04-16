@@ -7,17 +7,18 @@ using EntityStates;
 
 namespace PlayableTemplar.SkillStates
 {
-	// Token: 0x02000011 RID: 17
 	public class TemplarOverdrive : BaseSkillState
 	{
-		// Token: 0x0600005A RID: 90 RVA: 0x00004E34 File Offset: 0x00003034
+		public static float pushForce = 2500f;
+		private Transform modelTransform;
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
 			bool flag = base.characterBody;
 			if (flag)
 			{
-				base.characterBody.AddTimedBuff(PlayableTemplar.instance.overdriveBuff, 3f);
+				base.characterBody.AddTimedBuff(Modules.Buffs.overdriveBuff, 3f);
 			}
 			bool flag2 = FireTarball.effectPrefab;
 			if (flag2)
@@ -57,20 +58,13 @@ namespace PlayableTemplar.SkillStates
 				temporaryOverlay.originalMaterial = Resources.Load<Material>("Materials/matClayGooDebuff");
 				temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
 			}
-			Util.PlayScaledSound(FireTarball.attackSoundString, base.gameObject, 0.75f);
+			Util.PlayAttackSpeedSound(FireTarball.attackSoundString, base.gameObject, 0.75f);
 			this.outer.SetNextStateToMain();
 		}
 
-		// Token: 0x0600005B RID: 91 RVA: 0x00004FF9 File Offset: 0x000031F9
 		public override void OnExit()
 		{
 			base.OnExit();
 		}
-
-		// Token: 0x04000067 RID: 103
-		public static float pushForce = 2500f;
-
-		// Token: 0x04000068 RID: 104
-		private Transform modelTransform;
 	}
 }

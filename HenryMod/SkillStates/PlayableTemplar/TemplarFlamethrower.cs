@@ -9,10 +9,8 @@ using EntityStates;
 
 namespace PlayableTemplar.SkillStates
 {
-	// Token: 0x02000013 RID: 19
 	public class TemplarFlamethrower : BaseSkillState
 	{
-		// Token: 0x06000062 RID: 98 RVA: 0x0000509C File Offset: 0x0000329C
 		public override void OnEnter()
 		{
 			base.OnEnter();
@@ -27,13 +25,12 @@ namespace PlayableTemplar.SkillStates
 			bool flag = NetworkServer.active && base.characterBody;
 			if (flag)
 			{
-				base.characterBody.AddBuff(PlayableTemplar.instance.armorBuff);
+				base.characterBody.AddBuff(Modules.Buffs.armorBuff);
 			}
 			float num = this.attackSpeedStat * TemplarFlamethrower.tickFrequency;
 			this.tickDamageCoefficient = TemplarFlamethrower.damageCoefficientPerTick;
 		}
 
-		// Token: 0x06000063 RID: 99 RVA: 0x00005168 File Offset: 0x00003368
 		public override void OnExit()
 		{
 			Util.PlaySound(Flamebreath.endAttackSoundString, base.gameObject);
@@ -45,14 +42,13 @@ namespace PlayableTemplar.SkillStates
 			bool flag2 = NetworkServer.active && base.characterBody;
 			if (flag2)
 			{
-				base.characterBody.RemoveBuff(PlayableTemplar.instance.armorBuff);
+				base.characterBody.RemoveBuff(Modules.Buffs.armorBuff);
 			}
 			this.animator.SetBool("WeaponIsReady", false);
 			base.PlayCrossfade("Gesture, Additive", "BufferEmpty", 0.2f);
 			base.OnExit();
 		}
 
-		// Token: 0x06000064 RID: 100 RVA: 0x0000520C File Offset: 0x0000340C
 		private void FireFlame(string muzzleString)
 		{
 			base.GetAimRay();
@@ -75,7 +71,7 @@ namespace PlayableTemplar.SkillStates
                     radius = TemplarFlamethrower.radius,
                     falloffModel = BulletAttack.FalloffModel.None
                 };
-                LayerIndex background = LayerIndex.background;
+                LayerIndex background = LayerIndex;
 				bulletAttack.stopperMask = background.mask;
 				bulletAttack.procCoefficient = TemplarFlamethrower.procCoefficientPerTick;
 				bulletAttack.maxDistance = TemplarFlamethrower.maxDistance;
@@ -85,7 +81,6 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x06000065 RID: 101 RVA: 0x00005328 File Offset: 0x00003528
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();

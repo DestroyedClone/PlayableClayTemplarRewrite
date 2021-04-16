@@ -9,21 +9,33 @@ using EntityStates;
 
 namespace PlayableTemplar.SkillStates
 {
-	// Token: 0x02000019 RID: 25
 	public class TemplarFireMiniRocket : BaseSkillState
 	{
-		// Token: 0x06000087 RID: 135 RVA: 0x000063C4 File Offset: 0x000045C4
+		public static GameObject rocketPrefab;
+		public static GameObject effectPrefab;
+		public static int projectileCount = 1;
+		public static float totalYawSpread = 1f;
+		public static float baseDuration = 0.25f;
+		public static float baseFireDuration = 0.25f;
+		public static float damageCoefficient = Modules.Config.miniBazookaDamageCoefficient.Value;
+		public static float force = 25f;
+		public static float recoilAmplitude = 7.5f;
+		private float duration;
+		private float fireDuration;
+		private int projectilesFired;
+		private bool jelly;
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
 			base.StartAimMode(2f, false);
 			this.jelly = false;
-			TemplarFireMiniRocket.rocketPrefab = PlayableTemplar.templarRocket;
+			TemplarFireMiniRocket.rocketPrefab = Modules.Projectiles.templarRocket;
 			TemplarFireMiniRocket.effectPrefab = FireMegaFireball.muzzleflashEffectPrefab;
-			bool value = PlayableTemplar.jellyfishEvent.Value;
+			bool value = Modules.Config.jellyfishEvent.Value;
 			if (value)
 			{
-				bool flag = Random.Range(0, 100) <= 5;
+				bool flag = UnityEngine.Random.Range(0, 100) <= 5;
 				if (flag)
 				{
 					TemplarFireMiniRocket.rocketPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/JellyfishBody");
@@ -31,7 +43,7 @@ namespace PlayableTemplar.SkillStates
 				}
 				else
 				{
-					TemplarFireMiniRocket.rocketPrefab = PlayableTemplar.templarRocket;
+					TemplarFireMiniRocket.rocketPrefab = Modules.Projectiles.templarRocket;
 				}
 			}
 			base.AddRecoil(-1f * TemplarFireMiniRocket.recoilAmplitude, -2f * TemplarFireMiniRocket.recoilAmplitude, -0.5f * TemplarFireMiniRocket.recoilAmplitude, 0.5f * TemplarFireMiniRocket.recoilAmplitude);
@@ -40,7 +52,6 @@ namespace PlayableTemplar.SkillStates
 			Util.PlaySound(FireMegaFireball.attackString, base.gameObject);
 		}
 
-		// Token: 0x06000088 RID: 136 RVA: 0x000064B4 File Offset: 0x000046B4
 		public override void OnExit()
 		{
 			base.OnExit();
@@ -49,7 +60,6 @@ namespace PlayableTemplar.SkillStates
 			base.characterBody.crosshairPrefab = Resources.Load<GameObject>("prefabs/crosshair/SimpleDotCrosshair");
 		}
 
-		// Token: 0x06000089 RID: 137 RVA: 0x00006508 File Offset: 0x00004708
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
@@ -100,49 +110,9 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x0600008A RID: 138 RVA: 0x0000672C File Offset: 0x0000492C
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.PrioritySkill;
 		}
-
-		// Token: 0x040000A2 RID: 162
-		public static GameObject rocketPrefab;
-
-		// Token: 0x040000A3 RID: 163
-		public static GameObject effectPrefab;
-
-		// Token: 0x040000A4 RID: 164
-		public static int projectileCount = 1;
-
-		// Token: 0x040000A5 RID: 165
-		public static float totalYawSpread = 1f;
-
-		// Token: 0x040000A6 RID: 166
-		public static float baseDuration = 0.25f;
-
-		// Token: 0x040000A7 RID: 167
-		public static float baseFireDuration = 0.25f;
-
-		// Token: 0x040000A8 RID: 168
-		public static float damageCoefficient = PlayableTemplar.miniBazookaDamageCoefficient.Value;
-
-		// Token: 0x040000A9 RID: 169
-		public static float force = 25f;
-
-		// Token: 0x040000AA RID: 170
-		public static float recoilAmplitude = 7.5f;
-
-		// Token: 0x040000AB RID: 171
-		private float duration;
-
-		// Token: 0x040000AC RID: 172
-		private float fireDuration;
-
-		// Token: 0x040000AD RID: 173
-		private int projectilesFired;
-
-		// Token: 0x040000AE RID: 174
-		private bool jelly;
 	}
 }

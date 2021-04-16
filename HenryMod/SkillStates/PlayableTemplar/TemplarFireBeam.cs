@@ -7,10 +7,23 @@ using EntityStates;
 
 namespace PlayableTemplar.SkillStates
 {
-	// Token: 0x02000015 RID: 21
 	public class TemplarFireBeam : BaseSkillState
 	{
-		// Token: 0x06000070 RID: 112 RVA: 0x00005A8C File Offset: 0x00003C8C
+		public static float damageCoefficient = 8f;
+		public static float procCoefficient = 1f;
+		public static float force = 500f;
+		public static float minSpread = 0f;
+		public static float maxSpread = 0f;
+		public static int bulletCount = 1;
+		public static float baseDuration = 0.5f;
+		public static float radius = 1.25f;
+		public float recoilAmplitude = 10f;
+		public float bloom = 6f;
+		public Vector3 laserDirection;
+		private float duration;
+		private Ray modifiedAimRay;
+		private Animator animator;
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
@@ -24,7 +37,7 @@ namespace PlayableTemplar.SkillStates
 			float num = this.recoilAmplitude / this.attackSpeedStat;
 			base.AddRecoil(-1f * num, -1.5f * num, -0.25f * num, 0.25f * num);
 			base.characterBody.AddSpreadBloom(this.bloom);
-			Util.PlayScaledSound(FireLaser.attackSoundString, base.gameObject, 2f);
+			Util.PlayAttackSpeedSound(FireLaser.attackSoundString, base.gameObject, 2f);
 			string muzzleName = MinigunState.muzzleName;
 			bool flag = FireLaser.effectPrefab;
 			if (flag)
@@ -68,7 +81,6 @@ namespace PlayableTemplar.SkillStates
 			base.PlayCrossfade("Gesture, Additive", "FireMinigun", 0.75f * this.duration);
 		}
 
-		// Token: 0x06000071 RID: 113 RVA: 0x00005D34 File Offset: 0x00003F34
 		public override void OnExit()
 		{
 			base.OnExit();
@@ -77,7 +89,6 @@ namespace PlayableTemplar.SkillStates
 			this.animator.SetBool("WeaponIsReady", false);
 		}
 
-		// Token: 0x06000072 RID: 114 RVA: 0x00005D88 File Offset: 0x00003F88
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
@@ -88,52 +99,9 @@ namespace PlayableTemplar.SkillStates
 			}
 		}
 
-		// Token: 0x06000073 RID: 115 RVA: 0x00005DC8 File Offset: 0x00003FC8
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.PrioritySkill;
 		}
-
-		// Token: 0x0400008B RID: 139
-		public static float damageCoefficient = 8f;
-
-		// Token: 0x0400008C RID: 140
-		public static float procCoefficient = 1f;
-
-		// Token: 0x0400008D RID: 141
-		public static float force = 500f;
-
-		// Token: 0x0400008E RID: 142
-		public static float minSpread = 0f;
-
-		// Token: 0x0400008F RID: 143
-		public static float maxSpread = 0f;
-
-		// Token: 0x04000090 RID: 144
-		public static int bulletCount = 1;
-
-		// Token: 0x04000091 RID: 145
-		public static float baseDuration = 0.5f;
-
-		// Token: 0x04000092 RID: 146
-		public static float radius = 1.25f;
-
-		// Token: 0x04000093 RID: 147
-		public float recoilAmplitude = 10f;
-
-		// Token: 0x04000094 RID: 148
-		public float bloom = 6f;
-
-		// Token: 0x04000095 RID: 149
-		public Vector3 laserDirection;
-
-		// Token: 0x04000096 RID: 150
-		private float duration;
-
-		// Token: 0x04000097 RID: 151
-		private Ray modifiedAimRay;
-
-		// Token: 0x04000098 RID: 152
-		private Animator animator;
 	}
 }
