@@ -79,8 +79,15 @@ namespace PlayableTemplar.Modules
             if (model == null) model = newPrefab.GetComponentInChildren<CharacterModel>().gameObject;
             Transform modelBaseTransform = SetupModel(newPrefab, model.transform, bodyInfo);
 
+            // old templar stuff or code stuff
             newPrefab.GetComponent<SetStateOnHurt>().canBeHitStunned = false;
             newPrefab.tag = "Player";
+
+            if (newPrefab.GetComponent<DeathRewards>())
+                newPrefab.GetComponent<DeathRewards>().logUnlockableDef = null;
+
+            SfxLocator componentInChildren3 = newPrefab.GetComponentInChildren<SfxLocator>();
+            componentInChildren3.fallDamageSound = "Play_char_land_fall_damage";
 
             #region CharacterBody
             CharacterBody bodyComponent = newPrefab.GetComponent<CharacterBody>();
@@ -136,6 +143,12 @@ namespace PlayableTemplar.Modules
             bodyComponent.isChampion = false;
 
             bodyComponent.bodyColor = bodyInfo.bodyColor;
+
+            //templar stuff
+            bodyComponent.SetSpreadBloom(0f, false);
+            bodyComponent.spreadBloomCurve = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CharacterBody>().spreadBloomCurve;
+            bodyComponent.spreadBloomDecayTime = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CharacterBody>().spreadBloomDecayTime;
+
             #endregion
 
             SetupCharacterDirection(newPrefab, modelBaseTransform, model.transform);

@@ -4,19 +4,17 @@ using System.Collections.Generic;
 using System.Reflection;
 using BepInEx;
 using KinematicCharacterController;
-using On.RoR2;
+//using On.RoR2;
 using R2API;
 using R2API.Utils;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.Rendering;
 
 namespace PlayableTemplar
 {
 	public class PlayableTemplar : BaseUnityPlugin
 	{
-		// Token: 0x060000AF RID: 175 RVA: 0x00007A08 File Offset: 0x00005C08
 		public void Awake()
 		{
 			this.PopulateDisplays();
@@ -57,55 +55,12 @@ namespace PlayableTemplar
 					kinematicCharacterMotor2.SetCapsuleDimensions(kinematicCharacterMotor2.Capsule.radius * 0.5f, kinematicCharacterMotor2.Capsule.height * 0.5f, 0f);
 				}
 			}
-			component.SetSpreadBloom(0f, false);
-			component.spreadBloomCurve = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CharacterBody>().spreadBloomCurve;
-			component.spreadBloomDecayTime = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CharacterBody>().spreadBloomDecayTime;
 
 
-			GameObject gameObject4 = Resources.Load<GameObject>("Prefabs/CharacterBodies/Pot2Body");
-			MeshRenderer componentInChildren = gameObject4.GetComponentInChildren<MeshRenderer>();
-			GameObject gameObject5 = PrefabAPI.InstantiateClone(componentInChildren.gameObject, "VagabondHead", false, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\PlayableTemplar.cs", "RegisterTemplar", 679);
-			Object.Destroy(gameObject5.GetComponent<HurtBoxGroup>());
-			Object.Destroy(gameObject5.transform.GetComponentInChildren<HurtBox>());
-			Object.Destroy(gameObject5.transform.GetChild(0).gameObject);
-			gameObject5.transform.parent = this.myCharacter.GetComponentInChildren<ChildLocator>().FindChild("Head");
-			gameObject5.transform.localScale = new Vector3(1f, 1f, 1.25f);
-			gameObject5.transform.localRotation = Quaternion.Euler(new Vector3(-90f, 0f, 0f));
-			gameObject5.transform.localPosition = new Vector3(0f, -0.24f, 0f);
-			MeshRenderer componentInChildren2 = gameObject5.GetComponentInChildren<MeshRenderer>();
-			CharacterModel.RendererInfo[] baseRendererInfos = this.myCharacter.GetComponentInChildren<CharacterModel>().baseRendererInfos;
-			CharacterModel.RendererInfo[] baseRendererInfos2 = new CharacterModel.RendererInfo[]
-			{
-				baseRendererInfos[0],
-				baseRendererInfos[1],
-				baseRendererInfos[2],
-				baseRendererInfos[3],
-				baseRendererInfos[4],
-				baseRendererInfos[5],
-				new CharacterModel.RendererInfo
-				{
-					defaultMaterial = componentInChildren.material,
-					renderer = componentInChildren2,
-					defaultShadowCastingMode = ShadowCastingMode.On,
-					ignoreOverlays = false
-				}
-			};
-			this.myCharacter.GetComponentInChildren<CharacterModel>().baseRendererInfos = baseRendererInfos2;
 			this.characterDisplay = PrefabAPI.InstantiateClone(this.myCharacter.GetComponent<ModelLocator>().modelBaseTransform.gameObject, "TemplarDisplay", true, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\PlayableTemplar.cs", "RegisterTemplar", 712);
 			this.characterDisplay.transform.localScale = Vector3.one * 0.8f;
 			this.characterDisplay.AddComponent<PlayableTemplar.TemplarMenuAnim>();
 			this.characterDisplay.AddComponent<NetworkIdentity>();
-			ProjectileCatalog.getAdditionalEntries += delegate (List<GameObject> list)
-			{
-				list.Add(PlayableTemplar.templarGrenade);
-				list.Add(PlayableTemplar.templarRocket);
-			};
-			this.SkinSetup();
-			gameObject5.SetActive(false);
-			LanguageAPI.Add("TEMPLAR_NAME", "Clay Templar");
-			LanguageAPI.Add("TEMPLAR_SUBTITLE", "Lost Soldier of Aphelia");
-			LanguageAPI.Add("TEMPLAR_LORE", "\n''le minigunne man :-DDD\n\n");
-			LanguageAPI.Add("TEMPLAR_OUTRO_FLAVOR", "..and so it left, reveling in its triumph.");
 			component.name = "TemplarBody";
 			component.baseNameToken = "TEMPLAR_NAME";
 			component.subtitleNameToken = "TEMPLAR_SUBTITLE";
@@ -118,19 +73,8 @@ namespace PlayableTemplar
 			component.levelDamage = PlayableTemplar.damageGrowth.Value;
 			component.baseArmor = PlayableTemplar.baseArmor.Value;
 			component.baseCrit = 1f;
-			SfxLocator componentInChildren3 = this.myCharacter.GetComponentInChildren<SfxLocator>();
-			componentInChildren3.fallDamageSound = "Play_char_land_fall_damage";
-			this.myCharacter.GetComponent<DeathRewards>().logUnlockableName = "";
-			SurvivorAPI.AddSurvivor(survivorDef);
-			this.SkillSetup();
-			BodyCatalog.getAdditionalEntries += delegate (List<GameObject> list)
-			{
-				list.Add(this.myCharacter);
-			};
-			this.CreateMaster();
 		}
 
-		// Token: 0x060000B9 RID: 185 RVA: 0x0000995C File Offset: 0x00007B5C
 		private void SkinSetup()
 		{
 			GameObject gameObject = this.myCharacter.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
@@ -173,14 +117,6 @@ namespace PlayableTemplar
 				if (flag5)
 				{
 					gameObject3 = skinnedMeshRenderer.gameObject;
-				}
-			}
-			foreach (MeshRenderer meshRenderer in this.myCharacter.GetComponentsInChildren<MeshRenderer>())
-			{
-				bool flag6 = meshRenderer && meshRenderer.gameObject.name == "VagabondHead";
-				if (flag6)
-				{
-					gameObject4 = meshRenderer.gameObject;
 				}
 			}
 			LanguageAPI.Add("TEMPLARBODY_DEFAULT_SKIN_NAME", "Default");

@@ -88,7 +88,7 @@ namespace PlayableTemplar.Modules.Survivors
 
         internal virtual void InitializeDoppelganger()
         {
-            Modules.Prefabs.CreateGenericDoppelganger(instance.bodyPrefab, bodyName + "MonsterMaster", "Merc");
+            Modules.Prefabs.CreateGenericDoppelganger(instance.bodyPrefab, bodyName + "MonsterMaster", "Commando");
         }
 
         internal virtual void InitializeItemDisplays()
