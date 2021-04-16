@@ -8,7 +8,6 @@ using On.RoR2;
 using R2API;
 using R2API.Utils;
 using RoR2;
-using RoR2.Skills;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Rendering;
@@ -28,8 +27,6 @@ namespace PlayableTemplar
 		private void RegisterTemplar()
 		{
 			this.myCharacter = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterBodies/ClayBruiserBody"), "TemplarBody", true, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\PlayableTemplar.cs", "RegisterTemplar", 468);
-			this.myCharacter.GetComponent<SetStateOnHurt>().canBeHitStunned = false;
-			this.myCharacter.tag = "Player";
 			CharacterBody component = this.myCharacter.GetComponent<CharacterBody>();
 			component.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
 			component.portraitIcon = Assets.templarIconOld;
@@ -98,31 +95,6 @@ namespace PlayableTemplar
 			this.characterDisplay.transform.localScale = Vector3.one * 0.8f;
 			this.characterDisplay.AddComponent<PlayableTemplar.TemplarMenuAnim>();
 			this.characterDisplay.AddComponent<NetworkIdentity>();
-			bool flag3 = gameObject;
-			if (flag3)
-			{
-				PrefabAPI.RegisterNetworkPrefab(gameObject, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\PlayableTemplar.cs", "RegisterTemplar", 719);
-			}
-			bool flag4 = gameObject2;
-			if (flag4)
-			{
-				PrefabAPI.RegisterNetworkPrefab(gameObject2, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\PlayableTemplar.cs", "RegisterTemplar", 720);
-			}
-			bool flag5 = PlayableTemplar.templarGrenade;
-			if (flag5)
-			{
-				PrefabAPI.RegisterNetworkPrefab(PlayableTemplar.templarGrenade, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\PlayableTemplar.cs", "RegisterTemplar", 721);
-			}
-			bool flag6 = PlayableTemplar.templarRocket;
-			if (flag6)
-			{
-				PrefabAPI.RegisterNetworkPrefab(PlayableTemplar.templarRocket, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\PlayableTemplar.cs", "RegisterTemplar", 722);
-			}
-			bool flag7 = this.templarRocketEffect;
-			if (flag7)
-			{
-				PrefabAPI.RegisterNetworkPrefab(this.templarRocketEffect, "C:\\Users\\rseid\\Documents\\ror2mods\\PlayableTemplar\\PlayableTemplar\\PlayableTemplar.cs", "RegisterTemplar", 723);
-			}
 			ProjectileCatalog.getAdditionalEntries += delegate (List<GameObject> list)
 			{
 				list.Add(PlayableTemplar.templarGrenade);
@@ -130,21 +102,7 @@ namespace PlayableTemplar
 			};
 			this.SkinSetup();
 			gameObject5.SetActive(false);
-			string text = "The Clay Templar is a slow, tanky bruiser who uses the many weapons in his arsenal to mow down his opposition with ease.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-			text = text + "< ! > Minigun takes time to rev up, but inflicts heavy damage at a high rate of fire." + Environment.NewLine + Environment.NewLine;
-			text = text + "< ! > Let Blunderbuss reload all 4 shots and unload them all at once for a big burst of damage." + Environment.NewLine + Environment.NewLine;
-			text = text + "< ! > Use Bazooka after applying tar to deal massive AoE damage with chain explosions." + Environment.NewLine + Environment.NewLine;
-			bool value3 = PlayableTemplar.enableRocketJump.Value;
-			if (value3)
-			{
-				text = text + "< ! > The explosion force from Bazooka can be used to launch yourself high up with good timing.</color>" + Environment.NewLine;
-			}
-			else
-			{
-				text = text + "< ! > Tar Rifle is an all around good weapon in most cases, but lacks the high damage of Minigun.</color>" + Environment.NewLine;
-			}
 			LanguageAPI.Add("TEMPLAR_NAME", "Clay Templar");
-			LanguageAPI.Add("TEMPLAR_DESCRIPTION", text);
 			LanguageAPI.Add("TEMPLAR_SUBTITLE", "Lost Soldier of Aphelia");
 			LanguageAPI.Add("TEMPLAR_LORE", "\n''le minigunne man :-DDD\n\n");
 			LanguageAPI.Add("TEMPLAR_OUTRO_FLAVOR", "..and so it left, reveling in its triumph.");
@@ -163,16 +121,6 @@ namespace PlayableTemplar
 			SfxLocator componentInChildren3 = this.myCharacter.GetComponentInChildren<SfxLocator>();
 			componentInChildren3.fallDamageSound = "Play_char_land_fall_damage";
 			this.myCharacter.GetComponent<DeathRewards>().logUnlockableName = "";
-			SurvivorDef survivorDef = new SurvivorDef
-			{
-				name = "TEMPLAR_NAME",
-				unlockableName = "",
-				descriptionToken = "TEMPLAR_DESCRIPTION",
-				primaryColor = PlayableTemplar.CHAR_COLOR,
-				bodyPrefab = this.myCharacter,
-				displayPrefab = this.characterDisplay,
-				outroFlavorToken = "TEMPLAR_OUTRO_FLAVOR"
-			};
 			SurvivorAPI.AddSurvivor(survivorDef);
 			this.SkillSetup();
 			BodyCatalog.getAdditionalEntries += delegate (List<GameObject> list)
@@ -383,80 +331,6 @@ namespace PlayableTemplar
 			}
 		}
 
-		// Token: 0x060000C0 RID: 192 RVA: 0x0000DCB8 File Offset: 0x0000BEB8
-		private void PassiveSetup()
-		{
-			SkillLocator component = this.myCharacter.GetComponent<SkillLocator>();
-			LanguageAPI.Add("TEMPLAR_PASSIVE_NAME", "Volatile Tar");
-			LanguageAPI.Add("TEMPLAR_PASSIVE_DESCRIPTION", "Certain attacks cover enemies in <style=cIsDamage>tar</style>, <style=cIsUtility>slowing</style> them. <style=cIsDamage>Ignite</style> the <style=cIsDamage>tar</style> to create an <style=cIsDamage>explosion</style> that leaves enemies <style=cIsDamage>Scorched</style>, <style=cIsHealth>reducing their armor</style>.");
-			component.passiveSkill.enabled = true;
-			component.passiveSkill.skillNameToken = "TEMPLAR_PASSIVE_NAME";
-			component.passiveSkill.skillDescriptionToken = "TEMPLAR_PASSIVE_DESCRIPTION";
-			component.passiveSkill.icon = Assets.iconP;
-		}
-
-		// Token: 0x060000C6 RID: 198 RVA: 0x0000EFC8 File Offset: 0x0000D1C8
-		private void Masochism()
-		{
-			GameObject gameObject = Resources.Load<GameObject>("Prefabs/CharacterBodies/ClayBruiserBody");
-			foreach (GenericSkill obj in gameObject.GetComponentsInChildren<GenericSkill>())
-			{
-				Object.DestroyImmediate(obj);
-			}
-			SkillLocator component = gameObject.GetComponent<SkillLocator>();
-			SkillDef skillDef = this.myCharacter.GetComponentInChildren<SkillLocator>().primary.skillFamily.variants[0].skillDef;
-			component.primary = gameObject.AddComponent<GenericSkill>();
-			SkillFamily skillFamily = ScriptableObject.CreateInstance<SkillFamily>();
-			skillFamily.variants = new SkillFamily.Variant[1];
-			LoadoutAPI.AddSkillFamily(skillFamily);
-			Reflection.SetFieldValue<SkillFamily>(component.primary, "_skillFamily", skillFamily);
-			SkillFamily skillFamily2 = component.primary.skillFamily;
-			skillFamily2.variants[0] = new SkillFamily.Variant
-			{
-				skillDef = skillDef,
-				unlockableName = "",
-				viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
-			};
-			skillDef = this.myCharacter.GetComponentInChildren<SkillLocator>().special.skillFamily.variants[0].skillDef;
-			component.secondary = gameObject.AddComponent<GenericSkill>();
-			skillFamily = ScriptableObject.CreateInstance<SkillFamily>();
-			skillFamily.variants = new SkillFamily.Variant[1];
-			LoadoutAPI.AddSkillFamily(skillFamily);
-			Reflection.SetFieldValue<SkillFamily>(component.secondary, "_skillFamily", skillFamily);
-			skillFamily2 = component.secondary.skillFamily;
-			skillFamily2.variants[0] = new SkillFamily.Variant
-			{
-				skillDef = skillDef,
-				unlockableName = "",
-				viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
-			};
-			skillDef = this.myCharacter.GetComponentInChildren<SkillLocator>().secondary.skillFamily.variants[0].skillDef;
-			component.utility = gameObject.AddComponent<GenericSkill>();
-			skillFamily = ScriptableObject.CreateInstance<SkillFamily>();
-			skillFamily.variants = new SkillFamily.Variant[1];
-			LoadoutAPI.AddSkillFamily(skillFamily);
-			Reflection.SetFieldValue<SkillFamily>(component.utility, "_skillFamily", skillFamily);
-			skillFamily2 = component.utility.skillFamily;
-			skillFamily2.variants[0] = new SkillFamily.Variant
-			{
-				skillDef = skillDef,
-				unlockableName = "",
-				viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
-			};
-			skillDef = this.myCharacter.GetComponentInChildren<SkillLocator>().special.skillFamily.variants[0].skillDef;
-			component.special = gameObject.AddComponent<GenericSkill>();
-			skillFamily = ScriptableObject.CreateInstance<SkillFamily>();
-			skillFamily.variants = new SkillFamily.Variant[1];
-			LoadoutAPI.AddSkillFamily(skillFamily);
-			Reflection.SetFieldValue<SkillFamily>(component.special, "_skillFamily", skillFamily);
-			skillFamily2 = component.special.skillFamily;
-			skillFamily2.variants[0] = new SkillFamily.Variant
-			{
-				skillDef = skillDef,
-				unlockableName = "",
-				viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
-			};
-		}
 
 		// Token: 0x040000E4 RID: 228
 		public GameObject myCharacter;

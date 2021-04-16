@@ -22,10 +22,11 @@ namespace PlayableTemplar.Modules
         internal static void RegisterProjectiles()
         {
             // only separating into separate methods for my sanity
-            CreateBomb();
             CreateGrenade();
+            CreateRocket();
 
             AddProjectile(bombPrefab);
+            AddProjectile(templarGrenade);
         }
 
         internal static void AddProjectile(GameObject projectileToAdd)
@@ -92,27 +93,7 @@ namespace PlayableTemplar.Modules
             templarRocketPrefab.GetComponent<ProjectileDamage>().damageType = DamageType.BypassOneShotProtection;
         }
 
-        private static void CreateBomb()
-        {
-            bombPrefab = CloneProjectilePrefab("CommandoGrenadeProjectile", "HenryBombProjectile");
 
-            ProjectileImpactExplosion bombImpactExplosion = bombPrefab.GetComponent<ProjectileImpactExplosion>();
-            InitializeImpactExplosion(bombImpactExplosion);
-
-            bombImpactExplosion.blastRadius = 16f;
-            bombImpactExplosion.destroyOnEnemy = true;
-            bombImpactExplosion.lifetime = 12f;
-            bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
-            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
-            bombImpactExplosion.timerAfterImpact = true;
-            bombImpactExplosion.lifetimeAfterImpact = 0.1f;
-
-            ProjectileController bombController = bombPrefab.GetComponent<ProjectileController>();
-            bombController.ghostPrefab = CreateGhostPrefab("HenryBombGhost");
-            bombController.startSound = "";
-        }
-
-        // Token: 0x02000029 RID: 41
         public class TemplarSeparateFromParent : MonoBehaviour
         {
             // Token: 0x060000FC RID: 252 RVA: 0x0001099C File Offset: 0x0000EB9C

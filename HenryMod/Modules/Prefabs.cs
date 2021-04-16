@@ -79,6 +79,9 @@ namespace PlayableTemplar.Modules
             if (model == null) model = newPrefab.GetComponentInChildren<CharacterModel>().gameObject;
             Transform modelBaseTransform = SetupModel(newPrefab, model.transform, bodyInfo);
 
+            newPrefab.GetComponent<SetStateOnHurt>().canBeHitStunned = false;
+            newPrefab.tag = "Player";
+
             #region CharacterBody
             CharacterBody bodyComponent = newPrefab.GetComponent<CharacterBody>();
 
@@ -413,7 +416,7 @@ internal class BodyInfo
     internal string bodyNameToken = "";
     internal string subtitleNameToken = "";
 
-    internal string bodyNameToClone = "Commando";// body prefab you're cloning for your character- commando is the safest
+    internal string bodyNameToClone = "ClayBruiser";// body prefab you're cloning for your character- commando is the safest
 
     internal Texture characterPortrait = null;
 
