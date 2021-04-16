@@ -25,7 +25,7 @@ namespace PlayableTemplar.Modules
             }
 
             string outro = "..and so it left, reveling in its triumph.";
-            string outroFailure = "..and so it vanished, washed up in smoke.";
+            string outroFailure = "..and so it vanished, with lost triumph";
 
             LanguageAPI.Add(prefix + "NAME", "Clay Templar");
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
