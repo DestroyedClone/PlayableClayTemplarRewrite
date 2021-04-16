@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using EntityStates.ClayBruiser.Weapon;
 using EntityStates.LemurianBruiserMonster;
 using PlayableTemplar;
@@ -71,7 +71,7 @@ namespace PlayableTemplar.SkillStates
                     radius = TemplarFlamethrower.radius,
                     falloffModel = BulletAttack.FalloffModel.None
                 };
-                LayerIndex background = LayerIndex;
+                LayerIndex background = LayerIndex.world;
 				bulletAttack.stopperMask = background.mask;
 				bulletAttack.procCoefficient = TemplarFlamethrower.procCoefficientPerTick;
 				bulletAttack.maxDistance = TemplarFlamethrower.maxDistance;

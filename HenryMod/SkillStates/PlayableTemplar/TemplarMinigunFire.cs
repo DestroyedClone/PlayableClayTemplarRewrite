@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using EntityStates.ClayBruiser.Weapon;
 using PlayableTemplar;
 using RoR2;
