@@ -7,7 +7,7 @@ using EntityStates;
 using RoR2;
 using System.Reflection;
 
-namespace PlayableTemplar.Modules
+namespace PlayableTemplar.SkillStates
 {
     public static class States
     {

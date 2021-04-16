@@ -3,16 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using BepInEx;
-using BepInEx.Configuration;
-using EntityStates;
-using EntityStates.ClayBoss;
-using EntityStates.ClayBruiserMonster;
-using EntityStates.ClayMan;
-using EntityStates.ClaymanMonster;
-using EntityStates.Templar;
 using KinematicCharacterController;
 using On.RoR2;
-using PlayableTemplar.Achievements;
 using R2API;
 using R2API.Utils;
 using RoR2;
@@ -25,28 +17,11 @@ using UnityEngine.Rendering;
 
 namespace PlayableTemplar
 {
-	// Token: 0x0200001F RID: 31
-	[BepInDependency("com.bepis.r2api", 1)]
-	[BepInPlugin("com.rob.PlayableTemplar", "Playable Templar", "2.1.1")]
-	[R2APISubmoduleDependency(new string[]
-	{
-		"DirectorAPI",
-		"PrefabAPI",
-		"SurvivorAPI",
-		"LoadoutAPI",
-		"LanguageAPI",
-		"BuffAPI",
-		"EffectAPI",
-		"UnlockablesAPI"
-	})]
 	public class PlayableTemplar : BaseUnityPlugin
 	{
 		// Token: 0x060000AF RID: 175 RVA: 0x00007A08 File Offset: 0x00005C08
 		public void Awake()
 		{
-			PlayableTemplar.instance = this;
-			this.ReadConfig();
-			Assets.PopulateAssets();
 			this.PopulateDisplays();
 			this.RegisterTemplar();
 		}
@@ -410,21 +385,6 @@ namespace PlayableTemplar
 			}
 		}
 
-
-		// Token: 0x060000BF RID: 191 RVA: 0x0000DC5C File Offset: 0x0000BE5C
-		private void SkillSetup()
-		{
-			foreach (GenericSkill obj in this.myCharacter.GetComponentsInChildren<GenericSkill>())
-			{
-				Object.DestroyImmediate(obj);
-			}
-			this.PassiveSetup();
-			this.PrimarySetup();
-			this.SecondarySetup();
-			this.UtilitySetup();
-			this.SpecialSetup();
-		}
-
 		// Token: 0x060000C0 RID: 192 RVA: 0x0000DCB8 File Offset: 0x0000BEB8
 		private void PassiveSetup()
 		{
@@ -509,17 +469,6 @@ namespace PlayableTemplar
 				unlockableName = "",
 				viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
 			};
-		}
-
-		// Token: 0x060000C7 RID: 199 RVA: 0x0000F2BD File Offset: 0x0000D4BD
-		public PlayableTemplar()
-		{
-		}
-
-		// Token: 0x060000C8 RID: 200 RVA: 0x0000F2C8 File Offset: 0x0000D4C8
-		// Note: this type is marked as 'beforefieldinit'.
-		static PlayableTemplar()
-		{
 		}
 
 		// Token: 0x040000E4 RID: 228
