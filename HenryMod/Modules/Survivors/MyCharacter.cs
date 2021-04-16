@@ -20,18 +20,18 @@ namespace PlayableTemplar.Modules.Survivors
 
         internal override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
-            armor = 20f,
+            armor = Modules.Config.baseArmor.Value,
             armorGrowth = 0f,
             bodyName = instance.bodyName + "Body",
             bodyNameToken = PlayableTemplarPlugin.developerPrefix + "_PLAYABLETEMPLAR_BODY_NAME",
             bodyColor = Color.grey,
             characterPortrait = Modules.Assets.LoadCharacterIcon("PlayableTemplar"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
-            damage = 12f,
-            healthGrowth = 33f,
-            healthRegen = 1.5f,
+            damage = Modules.Config.baseDamage.Value,
+            healthGrowth = Modules.Config.healthGrowth.Value,
+            healthRegen = Modules.Config.baseRegen.Value,
             jumpCount = 1,
-            maxHealth = 110f,
+            maxHealth = Modules.Config.baseHealth.Value,
             subtitleNameToken = PlayableTemplarPlugin.developerPrefix + "_PLAYABLETEMPLAR_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/CrocoBody").GetComponent<CharacterBody>().preferredPodPrefab
         };

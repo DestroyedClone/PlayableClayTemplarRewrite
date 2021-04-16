@@ -1,6 +1,4 @@
-﻿using HenryMod.SkillStates;
-using HenryMod.SkillStates.BaseStates;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using MonoMod.RuntimeDetour;
 using EntityStates;
@@ -15,6 +13,9 @@ namespace PlayableTemplar.SkillStates
 
         internal static void RegisterStates()
         {
+            entityStates.Add(typeof(TemplarMinigunState));
+            entityStates.Add(typeof(TemplarRifleState));
+
             entityStates.Add(typeof(TemplarChargeMiniRocket));
             entityStates.Add(typeof(TemplarChargeRocket));
             entityStates.Add(typeof(TemplarFireMiniRocket));
@@ -35,6 +36,7 @@ namespace PlayableTemplar.SkillStates
             entityStates.Add(typeof(TemplarFireBeam));
             entityStates.Add(typeof(TemplarFlamethrower));
             entityStates.Add(typeof(TemplarOverdrive));
+
 
             //  all of the following code can be removed after the next ror2 update, fixing this vanilla bug
             // fixing a vanilla bug- ignore this
